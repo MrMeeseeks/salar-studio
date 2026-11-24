@@ -75,12 +75,46 @@ a{color:inherit}
 .sticker{position:absolute;right:4%;top:0;width:118px;height:118px;border-radius:50%;background:var(--hot);color:#fff;display:grid;place-items:center;text-align:center;font:800 14px/1.05 var(--display);letter-spacing:-.01em;transform:rotate(12deg);z-index:5;animation:spin 18s linear infinite}
 @keyframes spin{to{transform:rotate(372deg)}}
 
-/* marquee */
-.marquee{border-block:1.5px solid var(--ink);background:var(--ink);color:var(--paper);overflow:hidden;margin-top:56px}
-.marquee-track{display:flex;width:max-content;animation:slide 38s linear infinite}
-.marquee span{font:800 clamp(26px,3.2vw,44px)/1 var(--display);letter-spacing:-.03em;padding:22px 0;white-space:nowrap;display:flex;align-items:center}
-.marquee span::after{content:"✳";color:var(--hot);margin:0 36px;font-size:.7em}
-@keyframes slide{to{transform:translateX(-50%)}}
+/* trusted-by strip */
+.trusted{display:flex;align-items:center;gap:40px;margin-top:64px;padding:26px 0;border-top:1.5px solid var(--ink);border-bottom:1px solid var(--line)}
+.trusted ul{list-style:none;display:flex;flex:1;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap}
+.trusted li{display:flex;align-items:center;gap:10px;filter:grayscale(1) contrast(1.1);opacity:.78;transition:filter .3s,opacity .3s}
+.trusted li:hover{filter:none;opacity:1}
+.trusted svg{width:36px;height:36px;fill:var(--ink)}
+.trusted li:hover svg rect:nth-child(odd){fill:#7B2FF7}.trusted li:hover svg rect:nth-child(even){fill:#FF8A1F;opacity:1}
+.trusted b{font:800 19px/1 var(--display);letter-spacing:-.03em;white-space:nowrap}
+.trusted .serif-b{font:400 22px/1 var(--serif)}
+.trusted .mult{mix-blend-mode:multiply}
+
+/* statement band */
+.statement{background:var(--hot);color:#fff;padding:110px 0;margin-top:56px;overflow:hidden}
+.statement-grid{display:grid;grid-template-columns:1.4fr .6fr;grid-template-rows:auto auto;gap:30px 60px;align-items:center}
+.statement h2{font:800 clamp(52px,8vw,132px)/.88 var(--display);letter-spacing:-.055em;grid-column:1}
+.statement h2 .serif{color:var(--ink);font-size:1.05em}
+.statement p{grid-column:1;font-size:clamp(18px,1.5vw,21px);max-width:560px;color:#FFF3EE}
+.print{grid-column:2;grid-row:1/3;background:#fff;padding:14px 14px 46px;border-radius:4px;transform:rotate(5deg);box-shadow:0 40px 70px -25px rgba(70,15,0,.6);position:relative;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.print:hover{transform:rotate(-2deg) scale(1.03)}
+.print img{aspect-ratio:4/5;object-fit:cover;object-position:50% 30%;width:100%}
+.print figcaption{position:absolute;bottom:13px;left:0;right:0;text-align:center;font:italic 19px var(--serif);color:var(--ink)}
+
+/* meet the artist */
+.founder-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:center}
+.founder-photo{position:relative}
+.founder-photo img{border-radius:28px;aspect-ratio:1;object-fit:cover;width:100%}
+.founder-photo .tagline{position:absolute;right:-18px;bottom:28px;background:var(--ink);color:var(--paper);padding:14px 18px;border-radius:14px;font:800 16px/1.15 var(--display);letter-spacing:-.02em;transform:rotate(-3deg)}
+.founder h2{font:800 clamp(40px,5.4vw,78px)/.95 var(--display);letter-spacing:-.045em;margin:16px 0 22px}
+.founder p{color:var(--ink-2);margin-bottom:14px;max-width:600px}
+.roles{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+
+/* stats on cases */
+.stats{display:flex;gap:30px;margin:0 0 24px;flex-wrap:wrap}
+.stats div{font-size:13px;color:#9C9488;line-height:1.3}
+.stats b{display:block;font:800 34px/1 var(--display);letter-spacing:-.03em;color:var(--paper);margin-bottom:4px}
+
+/* sign-off */
+.signoff{padding:90px 0 30px;text-align:center}
+.signoff p{font:800 clamp(44px,8.6vw,140px)/.9 var(--display);letter-spacing:-.055em}
+.signoff .serif{color:var(--hot)}
 
 /* sections */
 section{padding:120px 0}
@@ -202,7 +236,8 @@ input:focus,textarea:focus,select:focus{border-color:var(--ink);outline:none}
 textarea{min-height:110px;resize:vertical}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips input{position:absolute;opacity:0;pointer-events:none}
-.chips label{display:inline-block;cursor:pointer}
+.chips label{display:inline-block;cursor:pointer;position:relative}
+.chips input{width:1px;height:1px;left:0;top:0}
 .chips span{display:inline-block;padding:10px 14px;border-radius:999px;border:1.5px solid var(--line);font:500 14px var(--body);transition:all .2s}
 .chips input:checked+span{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .chips input:focus-visible+span{outline:3px solid var(--hot);outline-offset:2px}
@@ -220,6 +255,12 @@ footer a:hover{color:var(--ink)}
 .rv.in{opacity:1;transform:none}
 
 @media (max-width:980px){
+  .statement-grid,.founder-grid{grid-template-columns:1fr}
+  .print{grid-column:1;grid-row:auto;max-width:300px;justify-self:center}
+  .trusted{flex-direction:column;align-items:flex-start;gap:18px}
+  .trusted ul{justify-content:flex-start;gap:18px 26px}
+  .founder-photo{max-width:440px}
+  .founder-photo .tagline{right:10px}
   .hero-grid,.sec-head,.case,.case:nth-of-type(even),.contact-grid,.art-note{grid-template-columns:1fr}
   .case:nth-of-type(even) .case-media{order:0}
   .sec-head p{justify-self:start}
@@ -261,7 +302,7 @@ footer a:hover{color:var(--ink)}
       <li><a href="#work">Work</a></li>
       <li><a href="#identity">Logos</a></li>
       <li><a href="#art">Art &amp; VFX</a></li>
-      <li><a href="#process">Process</a></li>
+      <li><a href="#about">About</a></li>
     </ul>
     <a class="btn btn-hot" href="#contact">Start a project <span aria-hidden="true">→</span></a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">Menu</button>
@@ -288,16 +329,28 @@ footer a:hover{color:var(--ink)}
       <div class="sticker">Hand-<br>drawn.<br>Never<br>AI.</div>
       <div class="card c1"><img src="img/vancobiz.webp" alt=""></div>
       <div class="card c2"><img src="img/hearth.webp" alt=""></div>
-      <div class="card c3"><img src="img/cari-1.webp" alt="" style="aspect-ratio:1;object-fit:cover;object-position:50% 25%"><span>signed, Salar</span></div>
+      <div class="card c3"><img src="img/cari-2.webp" alt="" style="aspect-ratio:1;object-fit:cover;object-position:50% 25%"><span>signed, Salar</span></div>
     </div>
   </div>
-  <div class="marquee" aria-label="Clients">
-    <div class="marquee-track">
-      <span>VancoBiz</span><span>VancoBiz Club</span><span>Hearth &amp; Hoard</span><span>Smile A Mile Art</span><span>Hideas</span>
-      <span aria-hidden="true">VancoBiz</span><span aria-hidden="true">VancoBiz Club</span><span aria-hidden="true">Hearth &amp; Hoard</span><span aria-hidden="true">Smile A Mile Art</span><span aria-hidden="true">Hideas</span>
-    </div>
+  <div class="wrap trusted" aria-label="Clients">
+    <span class="eyebrow">Trusted by</span>
+    <ul>
+      <li title="VancoBiz"><svg viewBox="0 0 100 100" aria-hidden="true"><rect width="47" height="47" rx="3"/><rect x="53" width="47" height="47" rx="3" opacity=".55"/><rect y="53" width="47" height="47" rx="3" opacity=".55"/><rect x="53" y="53" width="47" height="47" rx="3"/></svg><b>VancoBiz</b></li>
+      <li title="VancoBiz Club"><img src="img/vbc-logo.webp" alt="" width="44" height="44"><b>VancoBiz Club</b></li>
+      <li title="Hearth &amp; Hoard"><img src="img/hearth-mark.svg" alt="" width="40" height="40"><b class="serif-b">Hearth &amp; Hoard</b></li>
+      <li title="Smile A Mile Art"><img class="mult" src="img/smile-logo.webp" alt="" height="40"><b>Smile A Mile Art</b></li>
+      <li title="Hideas"><b class="serif-b" style="font-size:26px">Hideas</b></li>
+    </ul>
   </div>
 </header>
+
+<section class="statement" aria-label="Our promise">
+  <div class="wrap statement-grid">
+    <h2 class="rv">Your brand should be the one people <span class="serif">point at.</span></h2>
+    <figure class="print rv"><img src="img/cari-1.webp" alt="Hand-drawn digital caricature by Salar" loading="lazy"><figcaption>Drawn by hand, 2019</figcaption></figure>
+    <p class="rv">Not another template. Every logo, page and drawing starts with a real person and a pen, then gets built to work as hard as you do.</p>
+  </div>
+</section>
 
 <section id="services">
   <div class="wrap">
@@ -345,6 +398,7 @@ footer a:hover{color:var(--ink)}
         <p class="client">VancoBiz · Marketing agency</p>
         <h3>A bolder site for “Vancouver’s boldest” agency</h3>
         <p>A full website redesign with a 3D hero, plus two new logo directions to choose from.</p>
+        <div class="stats"><div><b>2</b>logo directions</div><div><b>3D</b>interactive hero</div><div><b>1</b>file to edit all copy</div></div>
         <ul>
           <li>Liquid-chrome 3D logo and particle hero in the browser</li>
           <li>Logo Option B: a Tile Grid mark that works as a playable 2×2 puzzle cube</li>
@@ -364,6 +418,7 @@ footer a:hover{color:var(--ink)}
         <p class="client">VancoBiz Club · Business network</p>
         <h3>Gold cards and a referral engine</h3>
         <p>A members’ club for local businesses needed to feel premium and prove its value. We designed the cards and built the app behind them.</p>
+        <div class="stats"><div><b>17</b>member businesses</div><div><b>2</b>languages, EN &amp; FA</div><div><b>86</b>automated security checks</div></div>
         <ul>
           <li>Engraved gold-foil member cards that tilt and catch the light</li>
           <li>Referral app: member directory, magic-link login, tracked referrals and dashboards</li>
@@ -402,6 +457,7 @@ footer a:hover{color:var(--ink)}
         <p class="client">Smile A Mile Art · Events</p>
         <h3>From sketchbook to fully booked</h3>
         <p>A live caricature brand that books private parties, weddings and corporate events across Vancouver and Toronto.</p>
+        <div class="stats"><div><b>2</b>cities served</div><div><b>3</b>event packages</div><div><b>2</b>languages, EN &amp; FA</div></div>
         <ul>
           <li>Booking site with city-aware buttons and a quote form that saves every lead</li>
           <li>Seasonal campaigns, like a dark Halloween theme with a guest artist feature</li>
@@ -485,6 +541,22 @@ footer a:hover{color:var(--ink)}
   </div>
 </section>
 
+<section class="founder" id="about">
+  <div class="wrap founder-grid">
+    <div class="founder-photo rv">
+      <img src="img/salar.webp" alt="Portrait of Salar, founder of Salar Studio" loading="lazy">
+      <span class="tagline">Your designer,<br>developer &amp; artist.</span>
+    </div>
+    <div class="rv">
+      <p class="eyebrow">Meet the founder</p>
+      <h2>Hi, I’m <span class="serif">Salar.</span></h2>
+      <p>I’m a caricature artist, VFX compositor and filmmaker who started building brands and websites for the businesses I met along the way.</p>
+      <p>When you work with the studio, you work with me: the person who draws your logo is the person who builds your site and shoots your content. No hand-offs, no account managers, nothing lost in translation.</p>
+      <div class="roles"><span class="tag">Caricature artist</span><span class="tag">VFX compositor</span><span class="tag">Filmmaker</span><span class="tag">Web designer</span></div>
+    </div>
+  </div>
+</section>
+
 <section class="process" id="process">
   <div class="wrap">
     <div class="sec-head rv">
@@ -532,6 +604,10 @@ footer a:hover{color:var(--ink)}
     </form>
   </div>
 </section>
+
+<div class="signoff wrap" aria-label="Studio motto">
+  <p class="rv">Hand-drawn. <span class="serif">Never AI.</span><br>Never forgettable.</p>
+</div>
 
 <footer>
   <div class="wrap">
