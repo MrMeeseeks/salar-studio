@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Salar Studio — Brand, web & visual studio in Vancouver</title>
+<title>Salar Studio — Look closer</title>
 <meta name="description" content="Salar Studio is a Vancouver creative studio: logos and brand identity, websites and web apps, 3D and VFX, illustration and live event art.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23141210'/%3E%3Ctext x='50' y='70' font-family='Arial Black,sans-serif' font-size='62' font-weight='900' fill='%23FF4F1F' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,288 +12,188 @@
 <style>
 :root{
   --paper:#F3EFE6; --paper-2:#EAE4D7; --ink:#141210; --ink-2:#2A2622; --mute:#6E675D; --line:#D6CEBF;
-  --hot:#FF4F1F; --hot-ink:#C9360E;
+  --hot:#FF4F1F; --hot-ink:#C9360E; --space:#05040A;
   --display:"Bricolage Grotesque",system-ui,sans-serif;
   --serif:"Instrument Serif",Georgia,serif;
   --body:"Inter Tight",system-ui,sans-serif;
-  --wrap:min(1240px,92vw);
-  --r:22px;
+  --wrap:min(1280px,92vw); --r:22px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
 body{background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit}
 .wrap{width:var(--wrap);margin-inline:auto}
 .eyebrow{font:600 12px/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
 .serif{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em}
-.btn{display:inline-flex;align-items:center;gap:.6em;padding:15px 26px;border-radius:999px;font:600 15px/1 var(--body);text-decoration:none;transition:transform .25s ease,background .25s ease,color .25s ease}
+.btn{display:inline-flex;align-items:center;gap:.6em;padding:15px 26px;border-radius:999px;font:600 15px/1 var(--body);text-decoration:none;transition:transform .25s,background .25s,color .25s;border:0;cursor:pointer}
 .btn:hover{transform:translateY(-2px)}
-.btn-hot{background:var(--hot);color:#fff}
-.btn-hot:hover{background:var(--hot-ink)}
-.btn-line{border:1.5px solid currentColor}
-.btn-line:hover{background:var(--ink);color:var(--paper)}
+.btn-hot{background:var(--hot);color:#fff}.btn-hot:hover{background:var(--hot-ink)}
+.btn-line{border:1.5px solid currentColor;background:transparent}
 :focus-visible{outline:3px solid var(--hot);outline-offset:3px;border-radius:6px}
 
 /* nav */
-.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
-.nav.scrolled{border-color:var(--line)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+.nav{position:fixed;inset:0 0 auto;z-index:60;color:#fff;transition:background .4s,color .4s,border-color .4s;border-bottom:1px solid transparent}
+.nav.solid{background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(12px);color:var(--ink);border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:76px}
 .brand{display:flex;align-items:center;gap:10px;font:800 21px/1 var(--display);letter-spacing:-.03em;text-decoration:none}
-.brand-dot{width:30px;height:30px;border-radius:9px;background:var(--ink);display:grid;place-items:center;color:var(--hot);font-size:19px}
-.nav-links{display:flex;gap:34px;list-style:none}
-.nav-links a{text-decoration:none;font-weight:500;font-size:15px;position:relative}
-.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--hot);transition:right .3s}
-.nav-links a:hover::after{right:0}
-.nav .btn{padding:12px 20px}
-.menu-btn{display:none;background:none;border:0;font:600 15px var(--body);cursor:pointer;color:var(--ink)}
+.brand-dot{width:30px;height:30px;border-radius:9px;background:var(--hot);display:grid;place-items:center;color:#fff;font-size:19px}
+.nav ul{display:flex;gap:34px;list-style:none}
+.nav ul a{text-decoration:none;font:600 13px/1 var(--body);letter-spacing:.14em;text-transform:uppercase}
+.nav ul a:hover{color:var(--hot)}
+.nav .btn{padding:12px 20px;border:1.5px solid currentColor;background:transparent;color:inherit;font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+.nav .btn:hover{background:var(--hot);border-color:var(--hot);color:#fff}
 
-/* hero */
-.hero{padding:72px 0 40px;position:relative}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
-.hero h1{font:800 clamp(52px,8.2vw,124px)/.9 var(--display);letter-spacing:-.055em;margin:22px 0 28px}
-.hero h1 .serif{font-size:1.08em;letter-spacing:-.03em;color:var(--hot)}
-.stop{position:relative;display:inline-block}
-.stop svg{position:absolute;left:-4%;bottom:-.12em;width:108%;height:.32em;overflow:visible}
-.stop path{fill:none;stroke:var(--ink);stroke-width:5;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:420;animation:draw 1.1s .6s cubic-bezier(.6,.1,.2,1) forwards}
-@keyframes draw{to{stroke-dashoffset:0}}
-.hero-lede{font-size:clamp(18px,1.5vw,21px);max-width:560px;color:var(--ink-2)}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
-.hero-meta{display:flex;gap:28px;margin-top:46px;flex-wrap:wrap}
-.hero-meta div{border-left:2px solid var(--hot);padding-left:14px;font-size:14px;color:var(--mute);line-height:1.35}
-.hero-meta b{display:block;color:var(--ink);font:800 22px/1.1 var(--display);letter-spacing:-.02em}
-
-.stack{position:relative;height:clamp(420px,46vw,600px)}
-.stack .card{position:absolute;border-radius:16px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(20,18,16,.45),0 0 0 1px rgba(20,18,16,.08);background:#111;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
-.stack .c1{width:78%;left:0;top:4%;transform:rotate(-7deg)}
-.stack .c2{width:74%;right:0;top:24%;transform:rotate(5deg)}
-.stack .c3{width:44%;left:16%;bottom:0;transform:rotate(-2deg);background:#fff;padding:10px 10px 34px;border-radius:6px}
-.stack .c3 span{position:absolute;bottom:9px;left:0;right:0;text-align:center;font:italic 17px var(--serif);color:var(--ink)}
-.stack:hover .c1{transform:rotate(-11deg) translate(-18px,-10px)}
-.stack:hover .c2{transform:rotate(8deg) translate(18px,-6px)}
-.stack:hover .c3{transform:rotate(1deg) translateY(14px)}
-.sticker{position:absolute;right:4%;top:0;width:118px;height:118px;border-radius:50%;background:var(--hot);color:#fff;display:grid;place-items:center;text-align:center;font:800 14px/1.05 var(--display);letter-spacing:-.01em;transform:rotate(12deg);z-index:5;animation:spin 18s linear infinite}
-@keyframes spin{to{transform:rotate(372deg)}}
-
-/* trusted-by strip */
-.trusted{display:flex;align-items:center;gap:40px;margin-top:64px;padding:26px 0;border-top:1.5px solid var(--ink);border-bottom:1px solid var(--line)}
-.trusted ul{list-style:none;display:flex;flex:1;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap}
-.trusted li{display:flex;align-items:center;gap:10px;filter:grayscale(1) contrast(1.1);opacity:.78;transition:filter .3s,opacity .3s}
-.trusted li:hover{filter:none;opacity:1}
-.trusted svg{width:36px;height:36px;fill:var(--ink)}
-.trusted li:hover svg rect:nth-child(odd){fill:#7B2FF7}.trusted li:hover svg rect:nth-child(even){fill:#FF8A1F;opacity:1}
-.trusted b{font:800 19px/1 var(--display);letter-spacing:-.03em;white-space:nowrap}
+/* ===== the dive ===== */
+.dive{height:520vh;position:relative;background:var(--space)}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:radial-gradient(ellipse 50% 60% at 65% 45%,#3a1a14,#120c10 60%,#07050a)}
+.head{position:absolute;inset:0;perspective:1200px}
+.head-inner{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.head img{position:absolute;left:0;top:0;width:1000px;height:1000px;max-width:none;transform-origin:0 0;will-change:transform;user-select:none}
+.head::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,transparent 45%,rgba(5,4,10,.55));pointer-events:none}
+#galaxy{position:absolute;inset:0;width:100%;height:100%;clip-path:circle(0px at 50% 50%);opacity:0;background:radial-gradient(circle at 50% 50%,#1b0f2e,#05040A 70%)}
+.cap{position:absolute;color:#fff;pointer-events:none;transition:opacity .2s}
+.cap-intro{left:max(4vw,24px);bottom:9vh;max-width:560px}
+.cap-intro h1{font:800 clamp(46px,7vw,112px)/.88 var(--display);letter-spacing:-.055em;text-shadow:0 6px 40px rgba(0,0,0,.45)}
+.cap-intro h1 .serif{color:var(--hot)}
+.cap-intro p{margin-top:16px;font-size:17px;color:#EDE6DA;max-width:420px;text-shadow:0 2px 16px rgba(0,0,0,.6)}
+.scroll-hint{position:absolute;right:max(4vw,24px);bottom:9vh;color:#fff;font:600 12px/1 var(--body);letter-spacing:.2em;text-transform:uppercase;display:flex;align-items:center;gap:12px}
+.scroll-hint i{display:block;width:1.5px;height:54px;background:linear-gradient(#fff,transparent);animation:drip 1.8s ease-in-out infinite;transform-origin:top}
+@keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+.cap-world{inset:0;display:grid;place-items:center;text-align:center;padding:0 5vw;opacity:0;background:radial-gradient(ellipse 60% 45% at 50% 50%,rgba(5,4,10,.82),rgba(5,4,10,.35) 70%,transparent)}
+.cap-world h2{font:800 clamp(52px,10vw,168px)/.86 var(--display);letter-spacing:-.06em;text-shadow:0 10px 60px rgba(255,79,31,.35)}
+.cap-world h2 .serif{color:var(--hot);display:block}
+.cap-world p{margin-top:24px;font-size:clamp(16px,1.4vw,20px);color:#fff;font-weight:500;text-shadow:0 2px 14px #05040A,0 0 4px #05040A}
+.trusted-wrap{background:var(--space);color:#fff;border-top:1px solid #1f1a2a}
+.trusted{display:flex;align-items:center;gap:40px;padding:30px 0}
+.trusted ul{list-style:none;display:flex;flex:1;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.trusted li{display:flex;align-items:center;gap:10px;opacity:.75;transition:opacity .3s;filter:grayscale(1) brightness(1.6)}
+.trusted li:hover{opacity:1;filter:none}
+.trusted b{font:800 18px/1 var(--display);letter-spacing:-.03em;white-space:nowrap}
 .trusted .serif-b{font:400 22px/1 var(--serif)}
-.trusted .mult{mix-blend-mode:multiply}
+.trusted svg{width:34px;height:34px}
+.trusted .eyebrow{color:#9a93ad}
+.inv{filter:invert(1)}
 
-/* statement band */
-.statement{background:var(--hot);color:#fff;padding:110px 0;margin-top:56px;overflow:hidden}
-.statement-grid{display:grid;grid-template-columns:1.4fr .6fr;grid-template-rows:auto auto;gap:30px 60px;align-items:center}
-.statement h2{font:800 clamp(52px,8vw,132px)/.88 var(--display);letter-spacing:-.055em;grid-column:1}
-.statement h2 .serif{color:var(--ink);font-size:1.05em}
-.statement p{grid-column:1;font-size:clamp(18px,1.5vw,21px);max-width:560px;color:#FFF3EE}
-.print{grid-column:2;grid-row:1/3;background:#fff;padding:14px 14px 46px;border-radius:4px;transform:rotate(5deg);box-shadow:0 40px 70px -25px rgba(70,15,0,.6);position:relative;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
-.print:hover{transform:rotate(-2deg) scale(1.03)}
-.print img{aspect-ratio:4/5;object-fit:cover;object-position:50% 30%;width:100%}
-.print figcaption{position:absolute;bottom:13px;left:0;right:0;text-align:center;font:italic 19px var(--serif);color:var(--ink)}
+/* ===== intro statement ===== */
+.intro{padding:140px 0 120px}
+.intro .eyebrow{margin-bottom:26px}
+.intro h2{font:800 clamp(44px,6.6vw,104px)/.92 var(--display);letter-spacing:-.05em;max-width:1150px}
+.intro h2 .serif{color:var(--hot)}
+.intro-row{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-top:50px;flex-wrap:wrap}
+.intro-row p{max-width:520px;font-size:19px;color:var(--ink-2)}
 
-/* meet the artist */
-.founder-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:center}
-.founder-photo{position:relative}
-.founder-photo img{border-radius:28px;aspect-ratio:1;object-fit:cover;width:100%}
-.founder-photo .tagline{position:absolute;right:-18px;bottom:28px;background:var(--ink);color:var(--paper);padding:14px 18px;border-radius:14px;font:800 16px/1.15 var(--display);letter-spacing:-.02em;transform:rotate(-3deg)}
-.founder h2{font:800 clamp(40px,5.4vw,78px)/.95 var(--display);letter-spacing:-.045em;margin:16px 0 22px}
-.founder p{color:var(--ink-2);margin-bottom:14px;max-width:600px}
-.roles{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-
-/* stats on cases */
-.stats{display:flex;gap:30px;margin:0 0 24px;flex-wrap:wrap}
-.stats div{font-size:13px;color:#9C9488;line-height:1.3}
-.stats b{display:block;font:800 34px/1 var(--display);letter-spacing:-.03em;color:var(--paper);margin-bottom:4px}
-
-/* sign-off */
-.signoff{padding:90px 0 30px;text-align:center}
-.signoff p{font:800 clamp(44px,8.6vw,140px)/.9 var(--display);letter-spacing:-.055em}
-.signoff .serif{color:var(--hot)}
-
-/* sections */
-section{padding:120px 0}
-.sec-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:64px}
-.sec-head h2{font:800 clamp(40px,5.4vw,78px)/.95 var(--display);letter-spacing:-.045em;margin-top:16px}
-.sec-head p{color:var(--ink-2);max-width:480px;justify-self:end}
-
-/* services */
-.svc{list-style:none;border-top:1.5px solid var(--ink)}
-.svc li{display:grid;grid-template-columns:90px 1.1fr 1.4fr 40px;gap:28px;align-items:start;padding:34px 0;border-bottom:1px solid var(--line);transition:background .3s,padding .3s}
-.svc li:hover{background:var(--paper-2);padding-inline:18px}
-.svc .n{font:400 22px var(--serif);font-style:italic;color:var(--hot)}
-.svc h3{font:800 clamp(26px,2.6vw,36px)/1 var(--display);letter-spacing:-.035em}
-.svc p{color:var(--ink-2)}
-.svc .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.tag{font:500 13px/1 var(--body);padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--paper)}
-.svc .arrow{font-size:26px;transition:transform .3s}
-.svc li:hover .arrow{transform:rotate(-45deg);color:var(--hot)}
-
-/* work */
-.work{background:var(--ink);color:var(--paper);border-radius:40px 40px 0 0}
-.work .eyebrow{color:#9C9488}
-.work .sec-head p{color:#CFC7BA}
-.case{display:grid;grid-template-columns:1.35fr 1fr;gap:56px;align-items:center;padding:56px 0;border-top:1px solid #2E2A26}
-.case:nth-of-type(even){grid-template-columns:1fr 1.35fr}
-.case:nth-of-type(even) .case-media{order:2}
-.frame{border-radius:14px;overflow:hidden;background:#1E1B18;box-shadow:0 40px 80px -30px rgba(0,0,0,.7);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
-.frame-bar{display:flex;gap:6px;padding:11px 14px;background:#24211D}
-.frame-bar i{width:10px;height:10px;border-radius:50%;background:#4A443D}
-.frame-bar i:first-child{background:var(--hot)}
-.case:hover .frame{transform:translateY(-6px) rotate(-.6deg)}
-.case-media{position:relative}
-.case-media .inset{position:absolute;width:42%;right:-4%;bottom:-10%;border-radius:12px;overflow:hidden;box-shadow:0 30px 50px -20px rgba(0,0,0,.8);border:4px solid var(--ink)}
-.case:nth-of-type(even) .case-media .inset{right:auto;left:-4%}
-.work .client{font:600 12px/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--hot)}
-.case h3{font:800 clamp(34px,3.8vw,56px)/.95 var(--display);letter-spacing:-.045em;margin:14px 0 18px}
-.case p{color:#CFC7BA}
-.case ul{list-style:none;margin:22px 0 26px;display:grid;gap:9px}
-.case li{padding-left:24px;position:relative;color:#E8E1D4;font-size:15.5px}
-.case li::before{content:"";position:absolute;left:0;top:.62em;width:12px;height:2px;background:var(--hot)}
-.case .tags{display:flex;flex-wrap:wrap;gap:8px}
-.case .tag{background:transparent;border-color:#3A3530;color:#CFC7BA}
-.case .links{display:flex;gap:18px;margin-top:26px;flex-wrap:wrap}
-.case .links a{font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--hot);padding-bottom:3px}
-.case .links a:hover{color:var(--hot)}
+/* ===== work grid ===== */
+.work{padding:0 0 120px}
+.sec-top{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:40px;flex-wrap:wrap}
+.sec-top h2{font:800 clamp(44px,5.6vw,86px)/.92 var(--display);letter-spacing:-.05em;margin-top:14px}
+.sec-top a{font-weight:600;text-decoration:none;border-bottom:2px solid var(--hot);padding-bottom:3px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.tile{text-decoration:none;display:block}
+.tile .pic{border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;background:var(--ink);position:relative}
+.tile .pic img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.tile:hover .pic img{transform:scale(1.05)}
+.tile .pic::after{content:"View ↗";position:absolute;right:16px;top:16px;background:var(--hot);color:#fff;padding:9px 14px;border-radius:999px;font:600 13px/1 var(--body);opacity:0;transform:translateY(-6px);transition:all .35s}
+.tile:hover .pic::after{opacity:1;transform:none}
+.tile .meta{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:16px 4px 0}
+.tile h3{font:800 28px/1 var(--display);letter-spacing:-.035em}
+.tile span{color:var(--mute);font-size:14px;text-align:right}
+.tile.wide{grid-column:1/-1}.tile.wide .pic{aspect-ratio:21/9}
 
 /* before / after */
-.ba{padding:0 0 72px}
-.ba-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:26px;flex-wrap:wrap}
-.ba-head h3{font:800 clamp(30px,3.4vw,48px)/1 var(--display);letter-spacing:-.04em;margin-top:12px}
-.ba-head p{color:#CFC7BA;max-width:420px}
-.ba-stage{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:1400/875;box-shadow:0 40px 80px -30px rgba(0,0,0,.8);user-select:none}
-.ba-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba-sec{background:var(--ink);color:var(--paper);padding:120px 0;border-radius:40px}
+.ba-sec .eyebrow{color:#9C9488}
+.ba-sec h2{font:800 clamp(44px,5.6vw,86px)/.92 var(--display);letter-spacing:-.05em;margin:14px 0 50px}
+.ba-pair{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.ba-cap{display:flex;justify-content:space-between;gap:12px;margin-top:14px;font-size:15px;color:#CFC7BA}
+.ba-cap b{font:800 22px/1 var(--display);letter-spacing:-.03em;color:var(--paper)}
+.ba-stage{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:16/10;user-select:none}
+.ba-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
 .ba-before{clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
 .ba-handle{position:absolute;top:0;bottom:0;left:var(--pos);width:3px;background:#fff;transform:translateX(-50%);pointer-events:none}
-.ba-handle span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:var(--hot);color:#fff;display:grid;place-items:center;font-size:22px;box-shadow:0 8px 24px rgba(0,0,0,.4)}
-.ba-label{position:absolute;top:16px;padding:8px 14px;border-radius:999px;font:600 12px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;pointer-events:none}
-.ba-l{left:16px;background:#fff;color:var(--ink)}
-.ba-r{right:16px;background:var(--hot);color:#fff}
+.ba-handle span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:var(--hot);color:#fff;display:grid;place-items:center;font-size:20px}
+.ba-label{position:absolute;top:14px;padding:7px 12px;border-radius:999px;font:600 11px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;pointer-events:none}
+.ba-l{left:14px;background:#fff;color:var(--ink)}.ba-r{right:14px;background:var(--hot);color:#fff}
 .ba-stage input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
-.ba-stage:has(input:focus-visible) .ba-handle span{outline:3px solid #fff;outline-offset:3px}
 
-.case-clients{margin-top:26px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.case-clients>span{font:600 11px/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:#9C9488}
-.client-logos{display:flex;gap:10px;flex-wrap:wrap}
-.client-logo{background:var(--paper);border-radius:12px;height:58px;padding:0 20px;display:flex;align-items:center}
-.client-logo img{width:auto}
+/* services */
+.services{padding:130px 0}
+.svc-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px}
+.svc-grid h2{font:800 clamp(44px,5.6vw,86px)/.92 var(--display);letter-spacing:-.05em;margin:14px 0 22px}
+.svc-grid>div:first-child p{color:var(--ink-2);max-width:420px}
+.svc{list-style:none;border-top:1.5px solid var(--ink)}
+.svc li{display:grid;grid-template-columns:64px 1fr;gap:6px 18px;padding:28px 0;border-bottom:1px solid var(--line)}
+.svc .n{font:italic 24px/1 var(--serif);color:var(--hot);grid-row:span 2;padding-top:4px}
+.svc h3{font:800 30px/1 var(--display);letter-spacing:-.035em}
+.svc p{color:var(--ink-2)}
 
-/* identity */
-.ident{background:var(--ink);color:var(--paper);padding-top:40px}
-.logo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.logo-tile{aspect-ratio:1;border-radius:var(--r);display:flex;flex-direction:column;justify-content:space-between;padding:22px;position:relative;overflow:hidden;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
-.logo-tile:hover{transform:translateY(-6px)}
-.logo-tile .mark{flex:1;display:grid;place-items:center}
-.logo-tile .cap{font:500 13px/1.35 var(--body)}
-.logo-tile .cap b{display:block;font:800 17px/1.1 var(--display);letter-spacing:-.02em}
-.lt-vb{background:#0B0B0F;color:#fff}
-.lt-hh{background:#F4EAD8;color:#1D1A26}
-.lt-sm{background:#fff;color:var(--ink)}
-.lt-club{background:linear-gradient(135deg,#E9C77B,#B88A3A 55%,#F3DB9C);color:#2B1E06}
-.lt-club .mark img{border-radius:12px;box-shadow:0 18px 30px -12px rgba(43,30,6,.6)}
-.tile-anim rect{transform-box:fill-box;transform-origin:center;transition:transform .6s cubic-bezier(.3,1.6,.4,1)}
-.lt-vb:hover .tile-anim rect:nth-of-type(1){transform:rotate(90deg)}
-.lt-vb:hover .tile-anim rect:nth-of-type(4){transform:rotate(-90deg)}
+/* team */
+.team{padding:0 0 130px}
+.team-card{display:grid;grid-template-columns:1fr 1fr;border-radius:32px;overflow:hidden;background:var(--hot);color:#fff}
+.team-card img{width:100%;height:100%;object-fit:cover;min-height:420px}
+.team-card>div{padding:clamp(30px,5vw,70px);display:flex;flex-direction:column;justify-content:center}
+.team-card .eyebrow{color:#FFE1D6}
+.team-card h2{font:800 clamp(44px,5.4vw,84px)/.9 var(--display);letter-spacing:-.05em;margin:14px 0 20px}
+.team-card h2 .serif{color:var(--ink)}
+.team-card p{color:#FFF3EE;margin-bottom:12px;max-width:480px}
+.roles{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.roles span{font:500 13px/1 var(--body);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.5)}
 
-/* art */
-.art-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:120px;gap:16px}
-.art-grid figure{border-radius:18px;overflow:hidden;position:relative;background:var(--paper-2)}
-.art-grid img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
-.art-grid figure:hover img{transform:scale(1.05)}
-.art-grid figcaption{position:absolute;left:12px;bottom:12px;background:var(--paper);padding:7px 12px;border-radius:999px;font:500 13px/1 var(--body)}
-.a1{grid-column:1/6;grid-row:span 4}
-.a2{grid-column:6/9;grid-row:span 2}
-.a3{grid-column:9/13;grid-row:span 2}
-.a4{grid-column:6/13;grid-row:span 3}
-.a5{grid-column:1/4;grid-row:span 3}
-.a6{grid-column:4/6;grid-row:span 2}
-.a6 img{object-position:50% 30%}
-.art-note{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
-.note{border:1.5px solid var(--ink);border-radius:var(--r);padding:28px}
-.note h4{font:800 24px/1.05 var(--display);letter-spacing:-.03em;margin-bottom:8px}
-.note p{color:var(--ink-2);font-size:15.5px}
-.note a{font-weight:600;text-decoration-color:var(--hot);text-underline-offset:4px}
-
-/* process */
-.process{background:var(--paper-2)}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
-.step{background:var(--paper);border-radius:var(--r);padding:30px 26px 34px;position:relative}
-.step::before{counter-increment:s;content:"0" counter(s);font:400 54px/1 var(--serif);font-style:italic;color:var(--hot);display:block;margin-bottom:26px}
-.step h4{font:800 24px/1.05 var(--display);letter-spacing:-.03em;margin-bottom:10px}
-.step p{color:var(--ink-2);font-size:15.5px}
+/* follow */
+.follow{padding:0 0 130px}
+.feed{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.feed a{aspect-ratio:1;border-radius:14px;overflow:hidden;display:block;position:relative}
+.feed img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.feed a:hover img{transform:scale(1.07)}
 
 /* contact */
-.contact{background:var(--hot);color:#fff;border-radius:40px;margin:0 auto 24px;width:min(1320px,96vw);padding:100px 0}
-.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:start}
-.contact h2{font:800 clamp(52px,7.4vw,112px)/.88 var(--display);letter-spacing:-.055em}
-.contact h2 .serif{color:var(--ink)}
-.contact .lede{font-size:19px;margin-top:26px;max-width:480px}
-.contact-lines{margin-top:36px;display:grid;gap:10px;font-size:17px}
-.contact-lines a{font-weight:600;text-underline-offset:5px}
+.contact{background:var(--space);color:#fff;padding:130px 0;position:relative;overflow:hidden}
+.contact::before{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at 80% 20%,rgba(255,79,31,.35),transparent 40%),radial-gradient(circle at 10% 90%,rgba(106,60,255,.3),transparent 45%)}
+.contact .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:start}
+.contact h2{font:800 clamp(52px,7.4vw,118px)/.86 var(--display);letter-spacing:-.055em}
+.contact h2 .serif{color:var(--hot)}
+.contact .lede{font-size:19px;margin-top:24px;max-width:480px;color:#E2DCF0}
+.contact-lines{margin-top:30px;display:grid;gap:8px}
+.contact-lines a{font-weight:600}
 form{background:var(--paper);color:var(--ink);border-radius:var(--r);padding:30px;display:grid;gap:16px}
 label{font:600 13px/1 var(--body);display:grid;gap:8px}
-input,textarea,select{font:400 16px var(--body);padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);width:100%}
-input:focus,textarea:focus,select:focus{border-color:var(--ink);outline:none}
+input,textarea{font:400 16px var(--body);padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);width:100%}
+input:focus,textarea:focus{border-color:var(--ink);outline:none}
 textarea{min-height:110px;resize:vertical}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chips input{position:absolute;opacity:0;pointer-events:none}
 .chips label{display:inline-block;cursor:pointer;position:relative}
-.chips input{width:1px;height:1px;left:0;top:0}
-.chips span{display:inline-block;padding:10px 14px;border-radius:999px;border:1.5px solid var(--line);font:500 14px var(--body);transition:all .2s}
+.chips input{position:absolute;opacity:0;width:1px;height:1px;left:0;top:0}
+.chips span{display:inline-block;padding:10px 14px;border-radius:999px;border:1.5px solid var(--line);font:500 14px var(--body)}
 .chips input:checked+span{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .chips input:focus-visible+span{outline:3px solid var(--hot);outline-offset:2px}
-form .btn{justify-content:center;border:0;cursor:pointer;background:var(--ink);color:var(--paper)}
-form .btn:hover{background:#000}
+form .btn{justify-content:center;background:var(--ink);color:var(--paper)}
 .fine{font-size:12.5px;color:var(--mute)}
 
-footer{padding:40px 0 50px}
-footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:14px;color:var(--mute)}
-footer a{text-decoration:none}
-footer a:hover{color:var(--ink)}
+footer{background:var(--ink);color:#CFC7BA;padding:90px 0 40px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+.foot-grid h4{font:600 12px/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:#8A8276;margin-bottom:16px}
+.foot-grid ul{list-style:none;display:grid;gap:8px}
+.foot-grid a{text-decoration:none}.foot-grid a:hover{color:var(--hot)}
+.foot-grid .brand{color:#fff;margin-bottom:14px}
+.signoff{font:800 clamp(40px,8.4vw,136px)/.88 var(--display);letter-spacing:-.055em;color:var(--paper);margin:90px 0 40px}
+.signoff .serif{color:var(--hot)}
+.legal{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:#8A8276;border-top:1px solid #2E2A26;padding-top:24px}
 
-/* reveal */
-.rv{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1)}
 .rv.in{opacity:1;transform:none}
 
-@media (max-width:980px){
-  .statement-grid,.founder-grid{grid-template-columns:1fr}
-  .print{grid-column:1;grid-row:auto;max-width:300px;justify-self:center}
-  .trusted{flex-direction:column;align-items:flex-start;gap:18px}
-  .trusted ul{justify-content:flex-start;gap:18px 26px}
-  .founder-photo{max-width:440px}
-  .founder-photo .tagline{right:10px}
-  .hero-grid,.sec-head,.case,.case:nth-of-type(even),.contact-grid,.art-note{grid-template-columns:1fr}
-  .case:nth-of-type(even) .case-media{order:0}
-  .sec-head p{justify-self:start}
-  .stack{height:440px;max-width:560px}
-  .svc li{grid-template-columns:50px 1fr;gap:10px 18px}
-  .svc li p,.svc li .tags{grid-column:2}
-  .svc .arrow{display:none}
-  .logo-grid{grid-template-columns:repeat(2,1fr)}
-  .steps{grid-template-columns:repeat(2,1fr)}
-  .art-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:110px}
-  .a1{grid-column:1/7;grid-row:span 4}.a2,.a3{grid-column:span 3;grid-row:span 2}.a4{grid-column:1/7;grid-row:span 3}.a5{grid-column:1/4;grid-row:span 3}.a6{grid-column:4/7;grid-row:span 3}
-  .case-media .inset{display:none}
-  .nav-links{display:none;position:absolute;top:74px;left:0;right:0;flex-direction:column;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px 4vw 18px}
-  .nav-links.open{display:flex}
-  .nav-links a{display:block;padding:14px 0;font-size:18px}
-  .menu-btn{display:block}
-  .nav .btn{display:none}
-  section{padding:84px 0}
-}
-@media (max-width:560px){
-  .steps,.logo-grid{grid-template-columns:1fr}
-  .logo-tile{aspect-ratio:4/3}
-  .sticker{width:92px;height:92px;font-size:12px}
+@media (max-width:900px){
+  .nav ul{display:none}
+  .grid,.ba-pair,.svc-grid,.team-card,.contact .wrap{grid-template-columns:1fr}
+  .tile.wide .pic{aspect-ratio:4/3}
+  .feed{grid-template-columns:repeat(3,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .trusted{flex-direction:column;align-items:flex-start;gap:16px}
+  .trusted ul{justify-content:flex-start}
+  .scroll-hint{display:none}
+  .team-card img{min-height:320px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
-  .stop path{stroke-dashoffset:0}
   .rv{opacity:1;transform:none}
 }
 </style>
@@ -302,315 +202,151 @@ footer a:hover{color:var(--ink)}
 
 <nav class="nav" id="nav">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Salar Studio home"><span class="brand-dot">S</span>Salar Studio</a>
-    <ul class="nav-links" id="links">
-      <li><a href="#services">Services</a></li>
+    <a class="brand" href="#top"><span class="brand-dot">S</span>Salar Studio</a>
+    <ul>
       <li><a href="#work">Work</a></li>
-      <li><a href="#identity">Logos</a></li>
-      <li><a href="#art">Art &amp; VFX</a></li>
+      <li><a href="#services">Services</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
-    <a class="btn btn-hot" href="#contact">Start a project <span aria-hidden="true">→</span></a>
-    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">Menu</button>
+    <a class="btn" href="#contact">Start a project</a>
   </div>
 </nav>
 
-<header class="hero" id="top">
-  <div class="wrap hero-grid">
-    <div>
-      <p class="eyebrow">Creative &amp; marketing studio · Vancouver, BC</p>
-      <h1>Brands that make people <span class="stop"><span class="serif">stop.</span><svg viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path d="M4 20 C 60 6, 120 26, 170 14 S 260 6, 296 18"/></svg></span></h1>
-      <p class="hero-lede">Logos, websites, 3D and hand-drawn art from one studio. We design the identity, build the site, and make the content that gets you noticed, for local businesses with big personalities.</p>
-      <div class="hero-cta">
-        <a class="btn btn-hot" href="#contact">Book a free intro call <span aria-hidden="true">→</span></a>
-        <a class="btn btn-line" href="#work">See the work</a>
-      </div>
-      <div class="hero-meta">
-        <div><b>Identity</b>logos &amp; brand systems</div>
-        <div><b>Web</b>sites, apps &amp; booking</div>
-        <div><b>Visuals</b>3D, VFX &amp; illustration</div>
+<!-- The dive: portrait → pupil → universe. Swap in a 3D head scan later (see HEAD_MODEL in the script). -->
+<section class="dive" id="top" aria-label="Intro: zoom into Salar's eye">
+  <div class="stage" id="stage">
+    <div class="head" id="head"><div class="head-inner" id="headInner"><img id="face" src="img/salar-full.webp" alt="Portrait of Salar, founder of Salar Studio" width="1000" height="1000"></div></div>
+    <canvas id="galaxy" aria-hidden="true"></canvas>
+    <div class="cap cap-intro" id="capIntro">
+      <h1>Look <span class="serif">closer.</span></h1>
+      <p>Every brand we make starts somewhere deeper than a template.</p>
+    </div>
+    <div class="scroll-hint" id="hint">Scroll <i></i></div>
+    <div class="cap cap-world" id="capWorld">
+      <div>
+        <h2>A whole world <span class="serif">behind every eye.</span></h2>
+        <p>Brands, websites and visuals, drawn by hand in Vancouver.</p>
       </div>
     </div>
-    <div class="stack" aria-hidden="true">
-      <div class="sticker">Hand-<br>drawn.<br>Never<br>AI.</div>
-      <div class="card c1"><img src="img/vancobiz.webp" alt=""></div>
-      <div class="card c2"><img src="img/hearth.webp" alt=""></div>
-      <div class="card c3"><img src="img/cari-2.webp" alt="" style="aspect-ratio:1;object-fit:cover;object-position:50% 25%"><span>signed, Salar</span></div>
-    </div>
-  </div>
-  <div class="wrap trusted" aria-label="Clients">
-    <span class="eyebrow">Trusted by</span>
-    <ul>
-      <li title="VancoBiz"><svg viewBox="0 0 100 100" aria-hidden="true"><rect width="47" height="47" rx="3"/><rect x="53" width="47" height="47" rx="3" opacity=".55"/><rect y="53" width="47" height="47" rx="3" opacity=".55"/><rect x="53" y="53" width="47" height="47" rx="3"/></svg><b>VancoBiz</b></li>
-      <li title="VancoBiz Club"><img src="img/vbc-logo.webp" alt="" width="44" height="44"><b>VancoBiz Club</b></li>
-      <li title="Hearth &amp; Hoard"><img src="img/hearth-mark.svg" alt="" width="40" height="40"><b class="serif-b">Hearth &amp; Hoard</b></li>
-      <li title="Smile A Mile Art"><img class="mult" src="img/smile-logo.webp" alt="" height="40"><b>Smile A Mile Art</b></li>
-      <li title="Hideas"><b class="serif-b" style="font-size:26px">Hideas</b></li>
-    </ul>
-  </div>
-</header>
-
-<section class="statement" aria-label="Our promise">
-  <div class="wrap statement-grid">
-    <h2 class="rv">Your brand should be the one people <span class="serif">point at.</span></h2>
-    <figure class="print rv"><img src="img/cari-1.webp" alt="Hand-drawn digital caricature by Salar" loading="lazy"><figcaption>Drawn by hand, 2019</figcaption></figure>
-    <p class="rv">Not another template. Every logo, page and drawing starts with a real person and a pen, then gets built to work as hard as you do.</p>
   </div>
 </section>
 
-<section id="services">
+<div class="trusted-wrap">
+  <div class="wrap trusted" aria-label="Clients">
+    <span class="eyebrow">Trusted by</span>
+    <ul>
+      <li><svg viewBox="0 0 100 100" aria-hidden="true"><rect width="47" height="47" rx="3" fill="#7B2FF7"/><rect x="53" width="47" height="47" rx="3" fill="#FF8A1F"/><rect y="53" width="47" height="47" rx="3" fill="#FF8A1F"/><rect x="53" y="53" width="47" height="47" rx="3" fill="#7B2FF7"/></svg><b>VancoBiz</b></li>
+      <li><img src="img/vbc-logo.webp" alt="" width="40" height="40"><b>VancoBiz Club</b></li>
+      <li><img src="img/hearth-mark.svg" alt="" width="36" height="36"><b class="serif-b">Hearth &amp; Hoard</b></li>
+      <li><img class="inv" src="img/lonsdale-quay.svg" alt="Lonsdale Quay" height="30"></li>
+      <li><img class="inv" src="img/paybyphone.svg" alt="PayByPhone" height="20" style="filter:grayscale(1) brightness(3)"></li>
+      <li><b>Smile A Mile Art</b></li>
+      <li><b class="serif-b" style="font-size:26px">Hideas</b></li>
+    </ul>
+  </div>
+</div>
+
+<section class="intro wrap">
+  <p class="eyebrow rv">Let’s work together</p>
+  <h2 class="rv">Logos, websites and art for businesses that <span class="serif">refuse to blend in.</span></h2>
+  <div class="intro-row rv">
+    <p>One studio for the whole picture: we draw the identity, build the site and make the content, so your brand looks and feels the same everywhere people meet it.</p>
+    <a class="btn btn-hot" href="#contact">Tell us about your project →</a>
+  </div>
+</section>
+
+<section class="work wrap" id="work">
+  <div class="sec-top rv"><div><p class="eyebrow">Selected work</p><h2>The <span class="serif">work.</span></h2></div></div>
+  <div class="grid">
+    <a class="tile wide rv" href="https://mrmeeseeks.github.io/vancobiz/" target="_blank" rel="noopener"><div class="pic"><img src="img/vancobiz.webp" alt="VancoBiz website with 3D chrome logo" loading="lazy"></div><div class="meta"><h3>VancoBiz</h3><span>Website · 3D · Logo</span></div></a>
+    <a class="tile rv" href="https://mrmeeseeks.github.io/vancobiz-club/" target="_blank" rel="noopener"><div class="pic"><img src="img/club-cards.webp" alt="VancoBiz Club gold member cards" loading="lazy"></div><div class="meta"><h3>VancoBiz Club</h3><span>Card design · Web app</span></div></a>
+    <a class="tile rv" href="https://mrmeeseeks.github.io/hearth-and-hoard/" target="_blank" rel="noopener"><div class="pic"><img src="img/hearth.webp" alt="Hearth and Hoard tavern website" loading="lazy"></div><div class="meta"><h3>Hearth &amp; Hoard</h3><span>Identity · Website</span></div></a>
+    <a class="tile rv" href="https://smileamileart.com/" target="_blank" rel="noopener"><div class="pic"><img src="img/at-work.webp" alt="Live digital caricature at a corporate event" loading="lazy"></div><div class="meta"><h3>Smile A Mile Art</h3><span>Brand · Booking site · Events</span></div></a>
+    <a class="tile rv" href="#before-after"><div class="pic"><img src="img/hideas-after.webp" alt="Hideas silent disco ceremonies website" loading="lazy" style="object-position:top"></div><div class="meta"><h3>Hideas</h3><span>Art direction · Website</span></div></a>
+    <a class="tile wide rv" href="https://salarsalahi.com" target="_blank" rel="noopener"><div class="pic"><img src="img/vfx-env.webp" alt="3D environment of a ruined chapel lit by a beam of light" loading="lazy"></div><div class="meta"><h3>Film &amp; VFX</h3><span>Compositing · 3D environments</span></div></a>
+  </div>
+</section>
+
+<section class="ba-sec" id="before-after">
   <div class="wrap">
-    <div class="sec-head rv">
-      <div><p class="eyebrow">What we do</p><h2>One studio.<br><span class="serif">Every</span> touchpoint.</h2></div>
-      <p>Most small businesses juggle a logo person, a web person and a content person. We are all three, so your brand looks and sounds the same everywhere.</p>
+    <p class="eyebrow rv">Before &amp; after</p>
+    <h2 class="rv">Drag to see <span class="serif">the difference.</span></h2>
+    <div class="ba-pair">
+      <div class="rv">
+        <div class="ba-stage" style="--pos:50%">
+          <img src="img/vancobiz.webp" alt="After: new VancoBiz homepage" loading="lazy">
+          <img class="ba-before" src="img/vancobiz-before.webp" alt="Before: original VancoBiz homepage" loading="lazy">
+          <span class="ba-label ba-l">Before</span><span class="ba-label ba-r">After</span>
+          <div class="ba-handle" aria-hidden="true"><span>⟷</span></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Compare old and new VancoBiz homepage">
+        </div>
+        <div class="ba-cap"><b>VancoBiz</b><span>Told people it was bold → shows it</span></div>
+      </div>
+      <div class="rv">
+        <div class="ba-stage" style="--pos:50%">
+          <img src="img/hideas-after.webp" alt="After: Hideas redesign" loading="lazy">
+          <img class="ba-before" src="img/hideas-before.webp" alt="Before: original hideas.ca homepage" loading="lazy">
+          <span class="ba-label ba-l">Before</span><span class="ba-label ba-r">After</span>
+          <div class="ba-handle" aria-hidden="true"><span>⟷</span></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Compare old and new Hideas homepage">
+        </div>
+        <div class="ba-cap"><b>Hideas</b><span>Mood shot → handmade collage</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services wrap" id="services">
+  <div class="svc-grid">
+    <div class="rv">
+      <p class="eyebrow">What we do</p>
+      <h2>Services</h2>
+      <p>Four things, done properly. Work with us from Vancouver, Toronto or anywhere with Wi-Fi.</p>
     </div>
     <ol class="svc">
-      <li class="rv"><span class="n">01</span><h3>Brand identity &amp; logos</h3><div><p>Marks you can recognise at a glance, with the colours, type and rules to use them well.</p><div class="tags"><span class="tag">Logo design</span><span class="tag">Brand guides</span><span class="tag">Signage &amp; print</span></div></div><span class="arrow" aria-hidden="true">→</span></li>
-      <li class="rv"><span class="n">02</span><h3>Websites &amp; web apps</h3><div><p>Fast, mobile-first sites that turn visits into bookings: from one-page launches to member apps with logins and dashboards.</p><div class="tags"><span class="tag">Websites</span><span class="tag">Booking &amp; quote forms</span><span class="tag">Member portals</span><span class="tag">EN / FA bilingual</span></div></div><span class="arrow" aria-hidden="true">→</span></li>
-      <li class="rv"><span class="n">03</span><h3>3D, motion &amp; VFX</h3><div><p>Interactive 3D logos, animated heroes and film-grade compositing from a working VFX artist.</p><div class="tags"><span class="tag">3D web</span><span class="tag">Motion</span><span class="tag">Compositing</span><span class="tag">Unreal environments</span></div></div><span class="arrow" aria-hidden="true">→</span></li>
-      <li class="rv"><span class="n">04</span><h3>Illustration &amp; live art</h3><div><p>Custom illustration, collage and live caricature that gives your brand, event or launch something people take home.</p><div class="tags"><span class="tag">Illustration</span><span class="tag">Live caricature</span><span class="tag">Event activations</span></div></div><span class="arrow" aria-hidden="true">→</span></li>
-      <li class="rv"><span class="n">05</span><h3>Social content systems</h3><div><p>A repeatable weekly plan: shoot, edit, caption, schedule, with your brand voice written down so it stays consistent.</p><div class="tags"><span class="tag">Reels</span><span class="tag">Content calendars</span><span class="tag">Captions &amp; CTAs</span></div></div><span class="arrow" aria-hidden="true">→</span></li>
+      <li class="rv"><span class="n">01</span><h3>Brand identity &amp; logos</h3><p>Marks people recognise at a glance, plus the colours, type and rules that keep them consistent.</p></li>
+      <li class="rv"><span class="n">02</span><h3>Websites &amp; web apps</h3><p>Fast, mobile-first sites that turn visits into bookings, up to member portals with logins and dashboards.</p></li>
+      <li class="rv"><span class="n">03</span><h3>3D, motion &amp; VFX</h3><p>Interactive 3D, animated heroes and film-grade compositing, like the dive at the top of this page.</p></li>
+      <li class="rv"><span class="n">04</span><h3>Illustration &amp; live art</h3><p>Hand-drawn illustration, collage and live caricature that gives people something to take home.</p></li>
     </ol>
   </div>
 </section>
 
-<section class="work" id="work">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div><p class="eyebrow">Selected work</p><h2>Built, drawn<br>&amp; <span class="serif">shipped.</span></h2></div>
-      <p>Real projects for real Vancouver and prairie businesses. Every screen here is live; click through and try them.</p>
-    </div>
-
-    <div class="ba rv" id="before-after">
-      <div class="ba-head">
-        <div><p class="client">Before &amp; after · VancoBiz</p><h3>Drag to see the difference.</h3></div>
-        <p>Same agency, same promise. The old homepage told people it was bold. The new one shows it.</p>
-      </div>
-      <div class="ba-stage" style="--pos:50%">
-        <img src="img/vancobiz.webp" alt="After: new VancoBiz homepage with a dark 3D chrome hero" loading="lazy">
-        <img class="ba-before" src="img/vancobiz-before.webp" alt="Before: original VancoBiz homepage with flat shapes on grey" loading="lazy">
-        <span class="ba-label ba-l">Before</span><span class="ba-label ba-r">After</span>
-        <div class="ba-handle" aria-hidden="true"><span>⟷</span></div>
-        <input type="range" min="0" max="100" value="50" aria-label="Before and after slider: drag to compare the old and new VancoBiz homepage">
-      </div>
-    </div>
-
-    <article class="case rv">
-      <div class="case-media">
-        <div class="frame"><div class="frame-bar"><i></i><i></i><i></i></div><img src="img/vancobiz.webp" alt="VancoBiz website hero with a 3D liquid-chrome VB logo" loading="lazy"></div>
-        <div class="inset"><img src="img/vancobiz-tile.webp" alt="VancoBiz Tile Grid logo option page" loading="lazy"></div>
-      </div>
-      <div>
-        <p class="client">VancoBiz · Marketing agency</p>
-        <h3>A bolder site for “Vancouver’s boldest” agency</h3>
-        <p>A full website redesign with a 3D hero, plus two new logo directions to choose from.</p>
-        <div class="stats"><div><b>2</b>logo directions</div><div><b>3D</b>interactive hero</div><div><b>1</b>file to edit all copy</div></div>
-        <ul>
-          <li>Liquid-chrome 3D logo and particle hero in the browser</li>
-          <li>Logo Option B: a Tile Grid mark that works as a playable 2×2 puzzle cube</li>
-          <li>Services, team, packages and a booking form, all editable from one file</li>
-        </ul>
-        <div class="tags"><span class="tag">Web design</span><span class="tag">3D</span><span class="tag">Logo</span><span class="tag">Next.js</span></div>
-        <div class="links"><a href="https://mrmeeseeks.github.io/vancobiz/" target="_blank" rel="noopener">View site ↗</a><a href="https://mrmeeseeks.github.io/vancobiz/option-b/" target="_blank" rel="noopener">Play with the logo ↗</a></div>
-      </div>
-    </article>
-
-    <article class="case rv">
-      <div class="case-media">
-        <div class="frame"><div class="frame-bar"><i></i><i></i><i></i></div><img src="img/club-cards.webp" alt="VancoBiz Club members page with engraved gold member cards" loading="lazy"></div>
-        <div class="inset"><img src="img/club-app.webp" alt="VancoBiz Club referral app directory" loading="lazy"></div>
-      </div>
-      <div>
-        <p class="client">VancoBiz Club · Business network</p>
-        <h3>Gold cards and a referral engine</h3>
-        <p>A members’ club for local businesses needed to feel premium and prove its value. We designed the cards and built the app behind them.</p>
-        <div class="stats"><div><b>17</b>member businesses</div><div><b>2</b>languages, EN &amp; FA</div><div><b>86</b>automated security checks</div></div>
-        <ul>
-          <li>Engraved gold-foil member cards that tilt and catch the light</li>
-          <li>Referral app: member directory, magic-link login, tracked referrals and dashboards</li>
-          <li>English and Farsi with full right-to-left support</li>
-        </ul>
-        <div class="tags"><span class="tag">Card design</span><span class="tag">Web app</span><span class="tag">Supabase</span><span class="tag">Bilingual</span></div>
-        <div class="links"><a href="https://mrmeeseeks.github.io/vancobiz-club/" target="_blank" rel="noopener">Members page ↗</a><a href="https://mrmeeseeks.github.io/vancobiz-club-app/" target="_blank" rel="noopener">Referral app ↗</a></div>
-      </div>
-    </article>
-
-    <article class="case rv">
-      <div class="case-media">
-        <div class="frame"><div class="frame-bar"><i></i><i></i><i></i></div><img src="img/hearth.webp" alt="Hearth and Hoard tavern website hero" loading="lazy"></div>
-        <div class="inset"><img src="img/provisions.webp" alt="Hearth and Hoard slab pizza" loading="lazy"></div>
-      </div>
-      <div>
-        <p class="client">Hearth &amp; Hoard · Yorkton, SK</p>
-        <h3>A tavern you want to walk into</h3>
-        <p>Board games, Dungeons &amp; Dragons and slab pizza in a 1912 storefront. The brand and pre-launch site build the hype before the doors open.</p>
-        <ul>
-          <li>Hex-and-flame logo mark and warm tavern palette</li>
-          <li>“Quest board”, provisions menu and bookable Dungeon room</li>
-          <li>Opening-news sign-up to fill the room on day one</li>
-        </ul>
-        <div class="tags"><span class="tag">Brand identity</span><span class="tag">Website</span><span class="tag">Launch</span></div>
-        <div class="links"><a href="https://mrmeeseeks.github.io/hearth-and-hoard/" target="_blank" rel="noopener">View site ↗</a></div>
-      </div>
-    </article>
-
-    <article class="case rv">
-      <div class="case-media">
-        <div class="frame"><div class="frame-bar"><i></i><i></i><i></i></div><img src="img/at-work.webp" alt="Live digital caricature at a corporate event" loading="lazy" style="aspect-ratio:16/10;object-fit:cover;width:100%"></div>
-        <div class="inset"><img src="img/cari-3.webp" alt="Group caricature on a small easel" loading="lazy"></div>
-      </div>
-      <div>
-        <p class="client">Smile A Mile Art · Events</p>
-        <h3>From sketchbook to fully booked</h3>
-        <p>A live caricature brand that books private parties, weddings and corporate events across Vancouver and Toronto.</p>
-        <div class="stats"><div><b>2</b>cities served</div><div><b>3</b>event packages</div><div><b>2</b>languages, EN &amp; FA</div></div>
-        <ul>
-          <li>Booking site with city-aware buttons and a quote form that saves every lead</li>
-          <li>Seasonal campaigns, like a dark Halloween theme with a guest artist feature</li>
-          <li>Persian-language page and a weekly Instagram content system</li>
-        </ul>
-        <div class="tags"><span class="tag">Brand</span><span class="tag">Website</span><span class="tag">Campaigns</span><span class="tag">Social</span></div>
-        <div class="case-clients">
-          <span>Clients include</span>
-          <div class="client-logos">
-            <span class="client-logo"><img src="img/lonsdale-quay.svg" alt="Lonsdale Quay Market" height="34"></span>
-            <span class="client-logo"><img src="img/paybyphone.svg" alt="PayByPhone" height="24"></span>
-          </div>
-        </div>
-        <div class="links"><a href="https://smileamileart.com/" target="_blank" rel="noopener">View site ↗</a></div>
-      </div>
-    </article>
-
-    <div class="ba rv" style="padding-top:56px;border-top:1px solid #2E2A26">
-      <div class="ba-head">
-        <div><p class="client">Before &amp; after · Hideas</p><h3>From mood shot to handmade.</h3></div>
-        <p>The old homepage opened on a forest image and left visitors guessing. The redesign says exactly what Hideas is, in a collage style no one else has.</p>
-      </div>
-      <div class="ba-stage" style="--pos:50%">
-        <img src="img/hideas-after.webp" alt="After: Hideas redesign with bold silent-disco headline and paper-collage art" loading="lazy">
-        <img class="ba-before" src="img/hideas-before.webp" alt="Before: original hideas.ca homepage with a forest meditation photo" loading="lazy">
-        <span class="ba-label ba-l">Before</span><span class="ba-label ba-r">After</span>
-        <div class="ba-handle" aria-hidden="true"><span>⟷</span></div>
-        <input type="range" min="0" max="100" value="50" aria-label="Before and after slider: drag to compare the old and new Hideas homepage">
-      </div>
-    </div>
-
-    <article class="case rv">
-      <div class="case-media">
-        <div class="frame"><div class="frame-bar"><i></i><i></i><i></i></div><img src="img/hideas.webp" alt="Paper-collage illustration of a cacao ceremony" loading="lazy" style="aspect-ratio:16/10;object-fit:cover;width:100%"></div>
-      </div>
-      <div>
-        <p class="client">Hideas · Wellness events</p>
-        <h3>Made by hand, in colour</h3>
-        <p>Website and art direction for silent-disco meditation, breathwork and cacao ceremonies in British Columbia.</p>
-        <ul>
-          <li>Paper-collage illustration style across the whole site</li>
-          <li>Podcast episode library and ceremony reservation requests</li>
-        </ul>
-        <div class="tags"><span class="tag">Art direction</span><span class="tag">Illustration</span><span class="tag">Website</span></div>
-      </div>
-    </article>
-  </div>
-</section>
-
-<section class="ident" id="identity">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div><p class="eyebrow">Logos &amp; marks</p><h2>Marks with <span class="serif">a story.</span></h2></div>
-      <p>Every mark is drawn for the business behind it. Hover to see them move.</p>
-    </div>
-    <div class="logo-grid">
-      <div class="logo-tile lt-vb rv">
-        <div class="mark">
-          <svg class="tile-anim" viewBox="0 0 100 100" width="58%" role="img" aria-label="VancoBiz Tile Grid mark">
-            <rect x="0" y="0" width="47" height="47" rx="3" fill="#7B2FF7"/><rect x="53" y="0" width="47" height="47" rx="3" fill="#FF8A1F"/>
-            <rect x="0" y="53" width="47" height="47" rx="3" fill="#FF8A1F"/><rect x="53" y="53" width="47" height="47" rx="3" fill="#7B2FF7"/>
-            <text x="23.5" y="34" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="30" fill="#fff" text-anchor="middle">V</text>
-            <text x="76.5" y="87" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="30" fill="#fff" text-anchor="middle">B</text>
-          </svg>
-        </div>
-        <p class="cap"><b>VancoBiz</b>Tile Grid · logo option B</p>
-      </div>
-      <div class="logo-tile lt-hh rv">
-        <div class="mark"><img src="img/hearth-mark.svg" alt="Hearth and Hoard hex and flame mark" width="150" height="150"></div>
-        <p class="cap"><b>Hearth &amp; Hoard</b>Hex, hearth &amp; flame</p>
-      </div>
-      <div class="logo-tile lt-sm rv">
-        <div class="mark"><img src="img/smile-logo.webp" alt="Smile A Mile Entertainment logo" style="width:82%"></div>
-        <p class="cap"><b>Smile A Mile</b>Entertainment wordmark</p>
-      </div>
-      <div class="logo-tile lt-club rv">
-        <div class="mark"><img src="img/club-cards.webp" alt="Engraved gold VancoBiz Club member cards" style="width:92%;aspect-ratio:16/10;object-fit:cover;object-position:50% 85%"></div>
-        <p class="cap"><b>VancoBiz Club</b>Gold-foil member card</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="art">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div><p class="eyebrow">Art &amp; VFX</p><h2>The <span class="serif">hand</span> behind the brand.</h2></div>
-      <p>Before the websites there was ink. The same artist draws your caricatures, composites film shots and builds your 3D, so the craft shows up in everything.</p>
-    </div>
-    <div class="art-grid">
-      <figure class="a1 rv"><img src="img/ink.webp" alt="Loose ink-wash figure study of two seated women" loading="lazy"><figcaption>Ink study</figcaption></figure>
-      <figure class="a2 rv"><img src="img/cari-1.webp" alt="Digital caricature of a bearded man" loading="lazy" style="object-position:50% 30%"><figcaption>Digital caricature</figcaption></figure>
-      <figure class="a3 rv"><img src="img/cari-3.webp" alt="Group caricature on an easel" loading="lazy"><figcaption>Live event art</figcaption></figure>
-      <figure class="a4 rv"><img src="img/vfx-env.webp" alt="Unreal Engine environment of a ruined chapel lit by a beam of light" loading="lazy"><figcaption>3D environment</figcaption></figure>
-      <figure class="a5 rv"><img src="img/cari-2.webp" alt="Caricature portrait" loading="lazy" style="object-position:50% 25%"><figcaption>Portrait</figcaption></figure>
-      <figure class="a6 rv"><img src="img/dungeon.webp" alt="Hearth and Hoard dungeon room concept" loading="lazy"><figcaption>Interior concept</figcaption></figure>
-    </div>
-    <div class="art-note">
-      <div class="note rv"><h4>Film &amp; VFX</h4><p>Compositing, environments and finishing for film. See the reel at <a href="https://salarsalahi.com" target="_blank" rel="noopener">salarsalahi.com</a>.</p></div>
-      <div class="note rv"><h4>Open-source tools</h4><p>Chromatic aberration and volumetric fog macros for DaVinci Fusion, free on <a href="https://github.com/MrMeeseeks/Fusion-tools" target="_blank" rel="noopener">GitHub</a>.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="founder" id="about">
-  <div class="wrap founder-grid">
-    <div class="founder-photo rv">
-      <img src="img/salar.webp" alt="Portrait of Salar, founder of Salar Studio" loading="lazy">
-      <span class="tagline">Your designer,<br>developer &amp; artist.</span>
-    </div>
-    <div class="rv">
-      <p class="eyebrow">Meet the founder</p>
+<section class="team wrap" id="about">
+  <div class="team-card rv">
+    <img src="img/salar.webp" alt="Portrait of Salar" loading="lazy">
+    <div>
+      <p class="eyebrow">The studio</p>
       <h2>Hi, I’m <span class="serif">Salar.</span></h2>
-      <p>I’m a caricature artist, VFX compositor and filmmaker who started building brands and websites for the businesses I met along the way.</p>
-      <p>When you work with the studio, you work with me: the person who draws your logo is the person who builds your site and shoots your content. No hand-offs, no account managers, nothing lost in translation.</p>
-      <div class="roles"><span class="tag">Caricature artist</span><span class="tag">VFX compositor</span><span class="tag">Filmmaker</span><span class="tag">Web designer</span></div>
+      <p>Caricature artist, VFX compositor and filmmaker. I started building brands and websites for the businesses I met along the way.</p>
+      <p>The person who draws your logo is the person who builds your site. No hand-offs, nothing lost in translation.</p>
+      <div class="roles"><span>Caricature artist</span><span>VFX compositor</span><span>Filmmaker</span><span>Web designer</span></div>
     </div>
   </div>
 </section>
 
-<section class="process" id="process">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div><p class="eyebrow">How it works</p><h2>Simple, <span class="serif">start to launch.</span></h2></div>
-      <p>No jargon, no surprise invoices. You always know what’s next and what it costs.</p>
-    </div>
-    <div class="steps">
-      <div class="step rv"><h4>Discover</h4><p>A free call to learn your business, your customers and what “working” looks like.</p></div>
-      <div class="step rv"><h4>Design</h4><p>Two or three directions to react to, like VancoBiz’s Option A and B. You pick; we refine.</p></div>
-      <div class="step rv"><h4>Build</h4><p>Your site, logo files and content, with live previews you can click through as we go.</p></div>
-      <div class="step rv"><h4>Launch &amp; grow</h4><p>We go live, hand over everything you own, and stay on for content and updates if you want.</p></div>
-    </div>
+<section class="follow wrap">
+  <div class="sec-top rv"><div><p class="eyebrow">Follow along</p><h2>@salar<span class="serif">.art</span></h2></div><a href="https://www.instagram.com/salar.art/" target="_blank" rel="noopener">Instagram ↗</a></div>
+  <div class="feed rv">
+    <a href="https://www.instagram.com/salar.art/" target="_blank" rel="noopener" aria-label="Caricature on Instagram"><img src="img/cari-1.webp" alt="" loading="lazy" style="object-position:50% 30%"></a>
+    <a href="https://www.instagram.com/salar.art/" target="_blank" rel="noopener" aria-label="Ink study on Instagram"><img src="img/ink.webp" alt="" loading="lazy"></a>
+    <a href="https://www.instagram.com/salar.art/" target="_blank" rel="noopener" aria-label="Group caricature on Instagram"><img src="img/cari-3.webp" alt="" loading="lazy"></a>
+    <a href="https://www.instagram.com/salar.art/" target="_blank" rel="noopener" aria-label="Portrait caricature on Instagram"><img src="img/cari-2.webp" alt="" loading="lazy" style="object-position:50% 25%"></a>
+    <a href="https://www.instagram.com/salar.art/" target="_blank" rel="noopener" aria-label="Live drawing on Instagram"><img src="img/at-work.webp" alt="" loading="lazy"></a>
+    <a href="https://www.instagram.com/salar.art/" target="_blank" rel="noopener" aria-label="Collage art on Instagram"><img src="img/hideas.webp" alt="" loading="lazy"></a>
   </div>
 </section>
 
 <section class="contact" id="contact">
-  <div class="wrap contact-grid">
-    <div>
-      <p class="eyebrow" style="color:#FFE1D6">Start a project</p>
-      <h2 style="margin-top:16px">Let’s make<br>yours <span class="serif">next.</span></h2>
-      <p class="lede">Tell us a little about your business. We’ll reply within one business day with ideas and a clear quote.</p>
-      <div class="contact-lines">
-        <span>Call or WhatsApp: <a href="tel:+16479091481">(647) 909-1481</a></span>
-        <span>Vancouver · North Vancouver · Toronto</span>
-      </div>
+  <div class="wrap">
+    <div class="rv">
+      <p class="eyebrow" style="color:#B9B0D6">Start a project</p>
+      <h2 style="margin-top:16px">Let’s build something <span class="serif">worth staring at.</span></h2>
+      <p class="lede">Tell us about your business. We’ll reply within one business day with ideas and a clear quote.</p>
+      <div class="contact-lines"><span>Call or WhatsApp: <a href="tel:+16479091481">(647) 909-1481</a></span><span>Vancouver · North Vancouver · Toronto</span></div>
     </div>
-    <form id="brief">
+    <form id="brief" class="rv">
       <label>Your name<input name="name" required autocomplete="name"></label>
       <label>Business<input name="business" autocomplete="organization"></label>
       <label>Email<input name="email" type="email" required autocomplete="email"></label>
@@ -622,54 +358,223 @@ footer a:hover{color:var(--ink)}
           <label><input type="checkbox" name="need" value="Web app"><span>Web app</span></label>
           <label><input type="checkbox" name="need" value="3D / VFX"><span>3D / VFX</span></label>
           <label><input type="checkbox" name="need" value="Illustration / live art"><span>Illustration / live art</span></label>
-          <label><input type="checkbox" name="need" value="Social content"><span>Social content</span></label>
         </div>
       </fieldset>
       <label>Tell us more<textarea name="msg" placeholder="What are you launching, and when?"></textarea></label>
-      <button class="btn" type="submit">Send brief <span aria-hidden="true">→</span></button>
+      <button class="btn" type="submit">Send brief →</button>
       <p class="fine">Opens your email app with your answers filled in.</p>
     </form>
   </div>
 </section>
 
-<div class="signoff wrap" aria-label="Studio motto">
-  <p class="rv">Hand-drawn. <span class="serif">Never AI.</span><br>Never forgettable.</p>
-</div>
-
 <footer>
   <div class="wrap">
-    <span>© <span id="yr">2026</span> Salar Studio · Vancouver, BC</span>
-    <span><a href="#services">Services</a> · <a href="#work">Work</a> · <a href="https://salarsalahi.com" target="_blank" rel="noopener">VFX reel</a> · <a href="#contact">Contact</a></span>
+    <div class="foot-grid">
+      <div><a class="brand" href="#top"><span class="brand-dot">S</span>Salar Studio</a><p>Brand, web &amp; visual studio.<br>Vancouver, BC.</p></div>
+      <div><h4>Services</h4><ul><li><a href="#services">Brand identity</a></li><li><a href="#services">Websites</a></li><li><a href="#services">3D &amp; VFX</a></li><li><a href="#services">Illustration</a></li></ul></div>
+      <div><h4>Studio</h4><ul><li><a href="#work">Work</a></li><li><a href="#before-after">Before &amp; after</a></li><li><a href="#about">About</a></li></ul></div>
+      <div><h4>Connect</h4><ul><li><a href="#contact">Contact</a></li><li><a href="https://www.instagram.com/salar.art/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://salarsalahi.com" target="_blank" rel="noopener">VFX reel</a></li></ul></div>
+    </div>
+    <p class="signoff">Hand-drawn. <span class="serif">Never AI.</span><br>Never forgettable.</p>
+    <div class="legal"><span>© <span id="yr">2026</span> Salar Studio</span><span>Made by hand in Vancouver</span></div>
   </div>
 </footer>
 
-<script>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.170.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.170.0/examples/jsm/"}}</script>
+<script type="module">
 // TODO: set your studio email here; the brief form sends to it.
 const STUDIO_EMAIL = "hello@example.com";
+// Pupil centre and pupil radius in the 1000×1000 portrait (img/salar-full.webp).
+const PUPIL = { x: 408, y: 428, r: 8 };
+// 3D head built in Blender from the portrait (3d/salar-head.blend). Set to null to use the flat photo.
+const HEAD_MODEL = "img/head.glb";
+// Pupil in the model's space (from img/head.json) and its radius in model units.
+const PUPIL3D = { x: -0.184, y: 0.144, z: 0.398, r: 0.016 };
 
-document.getElementById("yr").textContent = new Date().getFullYear();
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = id => document.getElementById(id);
+$("yr").textContent = new Date().getFullYear();
 
-const nav = document.getElementById("nav");
-addEventListener("scroll", () => nav.classList.toggle("scrolled", scrollY > 10), { passive: true });
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const range = (p, a, b) => clamp((p - a) / (b - a));
+const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const lerp = (a, b, t) => a + (b - a) * t;
 
-const menuBtn = document.getElementById("menuBtn"), links = document.getElementById("links");
-menuBtn.addEventListener("click", () => {
-  const open = links.classList.toggle("open");
-  menuBtn.setAttribute("aria-expanded", open);
-  menuBtn.textContent = open ? "Close" : "Menu";
-});
-links.addEventListener("click", e => { if (e.target.tagName === "A") { links.classList.remove("open"); menuBtn.setAttribute("aria-expanded", false); menuBtn.textContent = "Menu"; } });
+/* ---------- galaxy (three.js) ---------- */
+let renderer, scene, camera, galaxy, stars, three = null;
+const canvas = $("galaxy");
+try {
+  const THREE = await import("three");
+  three = THREE;
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(60, 1, 0.05, 100);
 
-const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12, rootMargin: "0px 0px -40px 0px" });
+  const makeGalaxy = () => {
+    const n = innerWidth < 700 ? 26000 : 60000, branches = 4, radius = 6, spin = 1.15, power = 3;
+    const pos = new Float32Array(n * 3), col = new Float32Array(n * 3);
+    const inside = new THREE.Color("#ffb08a"), mid = new THREE.Color("#ff4f1f"), outside = new THREE.Color("#5b3cff");
+    for (let i = 0; i < n; i++) {
+      const r = Math.pow(Math.random(), 1.4) * radius;
+      const b = (i % branches) / branches * Math.PI * 2, s = r * spin;
+      const rnd = () => Math.pow(Math.random(), power) * (Math.random() < .5 ? 1 : -1) * .5 * (r + .2);
+      pos[i*3] = Math.cos(b + s) * r + rnd();
+      pos[i*3+1] = rnd() * .45;
+      pos[i*3+2] = Math.sin(b + s) * r + rnd();
+      const t = r / radius, c = t < .25 ? inside.clone().lerp(mid, t / .25) : mid.clone().lerp(outside, (t - .25) / .75);
+      col[i*3] = c.r; col[i*3+1] = c.g; col[i*3+2] = c.b;
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    g.setAttribute("color", new THREE.BufferAttribute(col, 3));
+    return new THREE.Points(g, new THREE.PointsMaterial({ size: .022, sizeAttenuation: true, vertexColors: true, depthWrite: false, blending: THREE.AdditiveBlending, transparent: true }));
+  };
+  galaxy = makeGalaxy(); galaxy.rotation.x = .38; scene.add(galaxy);
+
+  const sp = new Float32Array(5000 * 3);
+  for (let i = 0; i < sp.length; i++) sp[i] = (Math.random() - .5) * 60;
+  const sg = new THREE.BufferGeometry(); sg.setAttribute("position", new THREE.BufferAttribute(sp, 3));
+  stars = new THREE.Points(sg, new THREE.PointsMaterial({ size: .05, color: "#d9d4ff", transparent: true, opacity: .8, depthWrite: false }));
+  scene.add(stars);
+} catch (e) {
+  console.warn("3D galaxy unavailable, using gradient fallback", e);
+}
+
+/* ---------- 3D head (falls back to the photo if it can't load) ---------- */
+let head = null, headRenderer, headScene, headCam, pupilObj;
+if (three && HEAD_MODEL) {
+  try {
+    const THREE = three;
+    const { GLTFLoader } = await import("three/addons/loaders/GLTFLoader.js");
+    const gltf = await new GLTFLoader().loadAsync(HEAD_MODEL);
+    const hc = document.createElement("canvas");
+    hc.id = "headCanvas"; hc.setAttribute("aria-hidden", "true");
+    hc.style.cssText = "position:absolute;inset:0;width:100%;height:100%";
+    $("head").appendChild(hc);
+    headRenderer = new THREE.WebGLRenderer({ canvas: hc, antialias: true, alpha: true });
+    headRenderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    headScene = new THREE.Scene();
+    headCam = new THREE.PerspectiveCamera(30, 1, 0.0005, 50);
+    head = new THREE.Group(); headScene.add(head);
+    gltf.scene.traverse(o => {
+      if (o.isMesh) {
+        const map = o.material.map; map.anisotropy = headRenderer.capabilities.getMaxAnisotropy();
+        o.material = new THREE.MeshBasicMaterial({ map, vertexColors: true, transparent: true, depthWrite: true });
+      }
+    });
+    head.add(gltf.scene);
+    pupilObj = new THREE.Object3D(); pupilObj.position.set(PUPIL3D.x, PUPIL3D.y, PUPIL3D.z); head.add(pupilObj);
+    $("face").style.display = "none";
+  } catch (e) {
+    console.warn("3D head unavailable, using the photo", e); head = null;
+  }
+}
+
+/* ---------- layout + scroll ---------- */
+const face = $("face"), headInner = $("headInner"), stage = $("stage"), dive = document.querySelector(".dive");
+let W = 0, H = 0, s0 = 1, p0 = { x: 0, y: 0 }, progress = 0, mouse = { x: 0, y: 0 }, tilt = { x: 0, y: 0 };
+
+function layout() {
+  W = stage.clientWidth; H = stage.clientHeight;
+  s0 = Math.max(W, H) / 1000 * (W < H ? 1.15 : 1);           // cover the screen
+  const left = (W - 1000 * s0) / 2, top = (H - 1000 * s0) * (W < H ? .45 : .32);
+  p0 = { x: left + PUPIL.x * s0, y: top + PUPIL.y * s0 };     // pupil on screen at the start
+  if (renderer) { renderer.setSize(W, H, false); camera.aspect = W / H; camera.updateProjectionMatrix(); }
+  if (head) { headRenderer.setSize(W, H, false); headCam.aspect = W / H; headCam.updateProjectionMatrix(); }
+}
+const THREE_DEG = d => d * Math.PI / 180;
+const pupilV = three ? new three.Vector3() : null;
+addEventListener("resize", () => { layout(); frame(); });
+layout();
+
+function readScroll() {
+  const total = dive.offsetHeight - H;
+  progress = reduce ? 1 : clamp(-dive.getBoundingClientRect().top / total);
+}
+addEventListener("scroll", () => { readScroll(); $("nav").classList.toggle("solid", dive.getBoundingClientRect().bottom < 80); }, { passive: true });
+addEventListener("pointermove", e => { mouse.x = e.clientX / innerWidth - .5; mouse.y = e.clientY / innerHeight - .5; }, { passive: true });
+
+const ZMAX = () => Math.max(W, H) * 0.9 / (PUPIL.r * s0);       // zoom until the pupil fills the screen
+let visible = true;
+new IntersectionObserver(([e]) => visible = e.isIntersecting).observe(stage);
+
+function frame(t = performance.now()) {
+  const p = progress;
+  // 1) zoom into the pupil
+  const z = ease(range(p, 0.04, 0.62));
+  const c = ease(range(p, 0.02, 0.45));
+  tilt.x += (mouse.x - tilt.x) * .08; tilt.y += (mouse.y - tilt.y) * .08;
+  const k = 1 - range(p, 0, .25);             // the head follows the cursor before the dive
+  let px, py, pupilR;
+
+  if (head) {
+    // 3D: the head turns with the mouse (and sways slowly), the camera flies into the pupil
+    const sway = reduce ? 0 : Math.sin(t * 0.0004) * 0.08;
+    head.rotation.set(tilt.y * 0.35 * k, (tilt.x * 0.9 + sway) * k, 0);
+    const aspect = W / H, tan = Math.tan(THREE_DEG(15));
+    const D0 = Math.max(2.05 / (2 * tan), 1.55 / (2 * tan * aspect));
+    const wide = aspect > 1.15 ? -0.42 : 0;    // on wide screens the head sits right of centre
+    const dMin = PUPIL3D.r * (H / 2) / (tan * 0.9 * Math.max(W, H));
+    const baseY = aspect < .8 ? -0.42 : 0.08;  // on tall phone screens the head sits higher, above the headline
+    const tgt = { x: lerp(0.05 + wide, PUPIL3D.x, c), y: lerp(baseY, PUPIL3D.y, c), z: lerp(0.15, PUPIL3D.z, c) };
+    const dist = (D0 + (0.15 - tgt.z)) * Math.exp(Math.log(dMin / D0) * z);
+    headCam.position.set(tgt.x, tgt.y, tgt.z + dist);
+    headCam.lookAt(tgt.x, tgt.y, tgt.z);
+    headCam.updateMatrixWorld();
+    const v = pupilObj.getWorldPosition(pupilV).project(headCam);
+    px = (v.x + 1) / 2 * W; py = (1 - v.y) / 2 * H;
+    pupilR = PUPIL3D.r / Math.max(dist, 1e-4) / tan * (H / 2);
+    $("headCanvas").style.opacity = 1 - range(p, 0.6, 0.72);
+    if (visible) headRenderer.render(headScene, headCam);
+  } else {
+    // photo fallback
+    const s = s0 * Math.exp(Math.log(ZMAX()) * z);
+    px = lerp(p0.x, W / 2, c); py = lerp(p0.y, H / 2, c);
+    face.style.transform = `translate(${px - PUPIL.x * s}px, ${py - PUPIL.y * s}px) scale(${s})`;
+    face.style.opacity = 1 - range(p, 0.6, 0.72);
+    headInner.style.transform = `rotateY(${tilt.x * 10 * k}deg) rotateX(${-tilt.y * 8 * k}deg) translateZ(0)`;
+    headInner.style.transformOrigin = `${px}px ${py}px`;
+    pupilR = PUPIL.r * s;
+  }
+
+  // 2) the pupil becomes a window into the universe, then the window opens
+  const open = ease(range(p, 0.56, 0.78));
+  const R = lerp(pupilR * 1.02, Math.hypot(W, H), open);
+  canvas.style.clipPath = `circle(${R}px at ${px}px ${py}px)`;
+  canvas.style.opacity = range(p, 0.18, 0.32);
+
+  // 3) captions
+  $("capIntro").style.opacity = 1 - range(p, 0.03, 0.12);
+  $("hint").style.opacity = 1 - range(p, 0.01, 0.06);
+  const w = range(p, 0.74, 0.86);
+  $("capWorld").style.opacity = w * (1 - range(p, 0.97, 1));
+  $("capWorld").style.transform = `scale(${lerp(1.08, 1, w)})`;
+
+  // 4) fly through the galaxy
+  if (renderer && visible && p > 0.15) {
+    const f = ease(range(p, 0.25, 1));
+    camera.position.set(Math.sin(t * 0.00008) * .4, lerp(4.2, 1.1, f), lerp(10, 3.2, f));
+    camera.lookAt(0, 0, 0);
+    galaxy.rotation.y = t * 0.00005 + f * 1.2;
+    stars.rotation.y = t * 0.00001;
+    renderer.render(scene, camera);
+  }
+}
+function loop(t) { frame(t); requestAnimationFrame(loop); }
+readScroll();
+if (reduce) { frame(); setTimeout(frame, 300); } else requestAnimationFrame(loop);
+face.decode?.().then(() => frame());
+
+/* ---------- rest of page ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
 document.querySelectorAll(".rv").forEach(el => io.observe(el));
 
-document.querySelectorAll(".ba-stage").forEach(stage =>
-  stage.querySelector("input").addEventListener("input", e => stage.style.setProperty("--pos", e.target.value + "%")));
+document.querySelectorAll(".ba-stage").forEach(st => st.querySelector("input").addEventListener("input", e => st.style.setProperty("--pos", e.target.value + "%")));
 
-document.getElementById("brief").addEventListener("submit", e => {
+$("brief").addEventListener("submit", e => {
   e.preventDefault();
-  const f = new FormData(e.target);
-  const needs = f.getAll("need").join(", ") || "Not sure yet";
+  const f = new FormData(e.target), needs = f.getAll("need").join(", ") || "Not sure yet";
   const body = `Name: ${f.get("name")}\nBusiness: ${f.get("business")}\nEmail: ${f.get("email")}\nNeeds: ${needs}\n\n${f.get("msg")}`;
   location.href = `mailto:${STUDIO_EMAIL}?subject=${encodeURIComponent("New project: " + (f.get("business") || f.get("name")))}&body=${encodeURIComponent(body)}`;
 });
