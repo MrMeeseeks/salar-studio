@@ -57,6 +57,7 @@ a{color:inherit}
 .cap-intro h1 .serif{color:var(--hot)}
 .cap-intro p{margin-top:16px;font-size:17px;color:#EDE6DA;max-width:420px;text-shadow:0 2px 16px rgba(0,0,0,.6)}
 .scroll-hint{position:absolute;right:max(4vw,24px);bottom:9vh;color:#fff;font:600 12px/1 var(--body);letter-spacing:.2em;text-transform:uppercase;display:flex;align-items:center;gap:12px}
+.drag-hint{display:none}.has-world .drag-hint{display:inline}.has-world .stage{touch-action:pan-y;cursor:grab}
 .scroll-hint i{display:block;width:1.5px;height:54px;background:linear-gradient(#fff,transparent);animation:drip 1.8s ease-in-out infinite;transform-origin:top}
 @keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
 .cap-world{inset:0;display:grid;place-items:center;text-align:center;padding:0 5vw;opacity:0;background:radial-gradient(ellipse 60% 45% at 50% 50%,rgba(5,4,10,.82),rgba(5,4,10,.35) 70%,transparent)}
@@ -213,7 +214,7 @@ footer{background:var(--ink);color:#CFC7BA;padding:90px 0 40px}
   </div>
 </nav>
 
-<!-- The dive: portrait → pupil → universe. Swap in a 3D head scan later (see HEAD_MODEL in the script). -->
+<!-- The dive: portrait → pupil → universe. The head is Gaussian splats (see SPLATS in the script and js/world.js). -->
 <section class="dive" id="top" aria-label="Intro: zoom into Salar's eye">
   <div class="stage" id="stage">
     <div class="head" id="head"><div class="head-inner" id="headInner"><img id="face" src="img/salar-full.webp" alt="Portrait of Salar, founder of Salar Studio" width="1000" height="1000"></div></div>
@@ -222,7 +223,7 @@ footer{background:var(--ink);color:#CFC7BA;padding:90px 0 40px}
       <h1>Look <span class="serif">closer.</span></h1>
       <p>Every brand we make starts somewhere deeper than a template.</p>
     </div>
-    <div class="scroll-hint" id="hint">Scroll <i></i></div>
+    <div class="scroll-hint" id="hint"><span class="drag-hint">Drag to spin&nbsp;&nbsp;·&nbsp;&nbsp;</span>Scroll <i></i></div>
     <div class="cap cap-world" id="capWorld">
       <div>
         <h2>A whole world <span class="serif">behind every eye.</span></h2>
@@ -386,8 +387,8 @@ footer{background:var(--ink);color:#CFC7BA;padding:90px 0 40px}
 const STUDIO_EMAIL = "hello@example.com";
 // Pupil centre and pupil radius in the 1000×1000 portrait (img/salar-full.webp).
 const PUPIL = { x: 408, y: 428, r: 8 };
-// 3D head built in Blender from the portrait (3d/salar-head.blend). Set to null to use the flat photo.
-const HEAD_MODEL = "img/head.glb";
+// Gaussian splats of the head (front from the portrait + depth, back estimated). Set to null to use the flat photo.
+const SPLATS = "img/head.splat";
 // Pupil in the model's space (from img/head.json) and its radius in model units.
 const PUPIL3D = { x: -0.184, y: 0.144, z: 0.398, r: 0.016 };
 
@@ -400,74 +401,24 @@ const range = (p, a, b) => clamp((p - a) / (b - a));
 const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 const lerp = (a, b, t) => a + (b - a) * t;
 
-/* ---------- galaxy (three.js) ---------- */
-let renderer, scene, camera, galaxy, stars, three = null;
+/* ---------- 3D world: Gaussian-splat head in front of the universe (falls back to the photo) ---------- */
 const canvas = $("galaxy");
-try {
-  const THREE = await import("three");
-  three = THREE;
-  renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
-  scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(60, 1, 0.05, 100);
-
-  const makeGalaxy = () => {
-    const n = innerWidth < 700 ? 26000 : 60000, branches = 4, radius = 6, spin = 1.15, power = 3;
-    const pos = new Float32Array(n * 3), col = new Float32Array(n * 3);
-    const inside = new THREE.Color("#ffb08a"), mid = new THREE.Color("#ff4f1f"), outside = new THREE.Color("#5b3cff");
-    for (let i = 0; i < n; i++) {
-      const r = Math.pow(Math.random(), 1.4) * radius;
-      const b = (i % branches) / branches * Math.PI * 2, s = r * spin;
-      const rnd = () => Math.pow(Math.random(), power) * (Math.random() < .5 ? 1 : -1) * .5 * (r + .2);
-      pos[i*3] = Math.cos(b + s) * r + rnd();
-      pos[i*3+1] = rnd() * .45;
-      pos[i*3+2] = Math.sin(b + s) * r + rnd();
-      const t = r / radius, c = t < .25 ? inside.clone().lerp(mid, t / .25) : mid.clone().lerp(outside, (t - .25) / .75);
-      col[i*3] = c.r; col[i*3+1] = c.g; col[i*3+2] = c.b;
-    }
-    const g = new THREE.BufferGeometry();
-    g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-    g.setAttribute("color", new THREE.BufferAttribute(col, 3));
-    return new THREE.Points(g, new THREE.PointsMaterial({ size: .022, sizeAttenuation: true, vertexColors: true, depthWrite: false, blending: THREE.AdditiveBlending, transparent: true }));
-  };
-  galaxy = makeGalaxy(); galaxy.rotation.x = .38; scene.add(galaxy);
-
-  const sp = new Float32Array(5000 * 3);
-  for (let i = 0; i < sp.length; i++) sp[i] = (Math.random() - .5) * 60;
-  const sg = new THREE.BufferGeometry(); sg.setAttribute("position", new THREE.BufferAttribute(sp, 3));
-  stars = new THREE.Points(sg, new THREE.PointsMaterial({ size: .05, color: "#d9d4ff", transparent: true, opacity: .8, depthWrite: false }));
-  scene.add(stars);
-} catch (e) {
-  console.warn("3D galaxy unavailable, using gradient fallback", e);
-}
-
-/* ---------- 3D head (falls back to the photo if it can't load) ---------- */
-let head = null, headRenderer, headScene, headCam, pupilObj;
-if (three && HEAD_MODEL) {
+let world = null;
+if (SPLATS) {
   try {
-    const THREE = three;
-    const { GLTFLoader } = await import("three/addons/loaders/GLTFLoader.js");
-    const gltf = await new GLTFLoader().loadAsync(HEAD_MODEL);
+    const [{ createWorld }, buf] = await Promise.all([
+      import("./js/world.js"),
+      fetch(SPLATS).then(r => { if (!r.ok) throw new Error("splats " + r.status); return r.arrayBuffer(); }),
+    ]);
     const hc = document.createElement("canvas");
     hc.id = "headCanvas"; hc.setAttribute("aria-hidden", "true");
     hc.style.cssText = "position:absolute;inset:0;width:100%;height:100%";
     $("head").appendChild(hc);
-    headRenderer = new THREE.WebGLRenderer({ canvas: hc, antialias: true, alpha: true });
-    headRenderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-    headScene = new THREE.Scene();
-    headCam = new THREE.PerspectiveCamera(30, 1, 0.0005, 50);
-    head = new THREE.Group(); headScene.add(head);
-    gltf.scene.traverse(o => {
-      if (o.isMesh) {
-        const map = o.material.map; map.anisotropy = headRenderer.capabilities.getMaxAnisotropy();
-        o.material = new THREE.MeshBasicMaterial({ map, vertexColors: true, transparent: true, depthWrite: true });
-      }
-    });
-    head.add(gltf.scene);
-    pupilObj = new THREE.Object3D(); pupilObj.position.set(PUPIL3D.x, PUPIL3D.y, PUPIL3D.z); head.add(pupilObj);
-    $("face").style.display = "none";
+    world = createWorld({ canvas: hc, splatBuffer: buf, pupil: PUPIL3D, mobile: innerWidth < 700 });
+    $("face").style.display = "none"; canvas.style.display = "none";
+    document.documentElement.classList.add("has-world");
   } catch (e) {
-    console.warn("3D head unavailable, using the photo", e); head = null;
+    console.warn("3D world unavailable, using the photo", e); world = null;
   }
 }
 
@@ -480,11 +431,8 @@ function layout() {
   s0 = Math.max(W, H) / 1000 * (W < H ? 1.15 : 1);           // cover the screen
   const left = (W - 1000 * s0) / 2, top = (H - 1000 * s0) * (W < H ? .45 : .32);
   p0 = { x: left + PUPIL.x * s0, y: top + PUPIL.y * s0 };     // pupil on screen at the start
-  if (renderer) { renderer.setSize(W, H, false); camera.aspect = W / H; camera.updateProjectionMatrix(); }
-  if (head) { headRenderer.setSize(W, H, false); headCam.aspect = W / H; headCam.updateProjectionMatrix(); }
+  if (world) world.resize(W, H);
 }
-const THREE_DEG = d => d * Math.PI / 180;
-const pupilV = three ? new three.Vector3() : null;
 addEventListener("resize", () => { layout(); frame(); });
 layout();
 
@@ -495,71 +443,54 @@ function readScroll() {
 addEventListener("scroll", () => { readScroll(); $("nav").classList.toggle("solid", dive.getBoundingClientRect().bottom < 80); }, { passive: true });
 addEventListener("pointermove", e => { mouse.x = e.clientX / innerWidth - .5; mouse.y = e.clientY / innerHeight - .5; }, { passive: true });
 
+// drag to spin the head; it also turns once on its own so people see the back of it
+let spin = 0, spinV = 0, dragging = false, lastX = 0, introStart = world && !reduce ? performance.now() + 900 : 0, introDone = !introStart;
+const INTRO_MS = 5600;
+const introAngle = t => introDone ? 0 : Math.PI * 2 * ease(clamp((t - introStart) / INTRO_MS));
+stage.addEventListener("pointerdown", e => {
+  if (!world || progress > .06 || e.target.closest("a,button")) return;
+  dragging = true; lastX = e.clientX;
+  if (!introDone) { spin += introAngle(performance.now()); introDone = true; }
+});
+addEventListener("pointermove", e => { if (!dragging) return; const dx = (e.clientX - lastX) * 0.009; lastX = e.clientX; spin += dx; spinV = dx; });
+["pointerup", "pointercancel"].forEach(ev => addEventListener(ev, () => dragging = false));
+
 const ZMAX = () => Math.max(W, H) * 0.9 / (PUPIL.r * s0);       // zoom until the pupil fills the screen
 let visible = true;
 new IntersectionObserver(([e]) => visible = e.isIntersecting).observe(stage);
 
 function frame(t = performance.now()) {
   const p = progress;
-  // 1) zoom into the pupil
-  const z = ease(range(p, 0.04, 0.62));
-  const c = ease(range(p, 0.02, 0.45));
   tilt.x += (mouse.x - tilt.x) * .08; tilt.y += (mouse.y - tilt.y) * .08;
   const k = 1 - range(p, 0, .25);             // the head follows the cursor before the dive
-  let px, py, pupilR;
 
-  if (head) {
-    // 3D: the head turns with the mouse (and sways slowly), the camera flies into the pupil
+  if (world) {
+    if (!dragging) { spin += spinV; spinV *= .93; }
+    if (!introDone && t > introStart + INTRO_MS) introDone = true;
+    let a = spin + introAngle(t);
+    a = Math.atan2(Math.sin(a), Math.cos(a));      // shortest way back to facing front during the dive
     const sway = reduce ? 0 : Math.sin(t * 0.0004) * 0.08;
-    head.rotation.set(tilt.y * 0.35 * k, (tilt.x * 0.9 + sway) * k, 0);
-    const aspect = W / H, tan = Math.tan(THREE_DEG(15));
-    const D0 = Math.max(2.05 / (2 * tan), 1.55 / (2 * tan * aspect));
-    const wide = aspect > 1.15 ? -0.42 : 0;    // on wide screens the head sits right of centre
-    const dMin = PUPIL3D.r * (H / 2) / (tan * 0.9 * Math.max(W, H));
-    const baseY = aspect < .8 ? -0.42 : 0.08;  // on tall phone screens the head sits higher, above the headline
-    const tgt = { x: lerp(0.05 + wide, PUPIL3D.x, c), y: lerp(baseY, PUPIL3D.y, c), z: lerp(0.15, PUPIL3D.z, c) };
-    const dist = (D0 + (0.15 - tgt.z)) * Math.exp(Math.log(dMin / D0) * z);
-    headCam.position.set(tgt.x, tgt.y, tgt.z + dist);
-    headCam.lookAt(tgt.x, tgt.y, tgt.z);
-    headCam.updateMatrixWorld();
-    const v = pupilObj.getWorldPosition(pupilV).project(headCam);
-    px = (v.x + 1) / 2 * W; py = (1 - v.y) / 2 * H;
-    pupilR = PUPIL3D.r / Math.max(dist, 1e-4) / tan * (H / 2);
-    $("headCanvas").style.opacity = 1 - range(p, 0.6, 0.72);
-    if (visible) headRenderer.render(headScene, headCam);
+    if (visible) world.update(p, t, { x: tilt.y * 0.35 * k, y: (a + tilt.x * 0.9 + sway) * k });
   } else {
-    // photo fallback
+    // photo fallback: zoom into the pupil, which opens onto a gradient "universe"
+    const z = ease(range(p, 0.04, 0.62)), c = ease(range(p, 0.02, 0.45));
     const s = s0 * Math.exp(Math.log(ZMAX()) * z);
-    px = lerp(p0.x, W / 2, c); py = lerp(p0.y, H / 2, c);
+    const px = lerp(p0.x, W / 2, c), py = lerp(p0.y, H / 2, c);
     face.style.transform = `translate(${px - PUPIL.x * s}px, ${py - PUPIL.y * s}px) scale(${s})`;
     face.style.opacity = 1 - range(p, 0.6, 0.72);
     headInner.style.transform = `rotateY(${tilt.x * 10 * k}deg) rotateX(${-tilt.y * 8 * k}deg) translateZ(0)`;
     headInner.style.transformOrigin = `${px}px ${py}px`;
-    pupilR = PUPIL.r * s;
+    const R = lerp(PUPIL.r * s * 1.02, Math.hypot(W, H), ease(range(p, 0.56, 0.78)));
+    canvas.style.clipPath = `circle(${R}px at ${px}px ${py}px)`;
+    canvas.style.opacity = range(p, 0.18, 0.32);
   }
 
-  // 2) the pupil becomes a window into the universe, then the window opens
-  const open = ease(range(p, 0.56, 0.78));
-  const R = lerp(pupilR * 1.02, Math.hypot(W, H), open);
-  canvas.style.clipPath = `circle(${R}px at ${px}px ${py}px)`;
-  canvas.style.opacity = range(p, 0.18, 0.32);
-
-  // 3) captions
+  // captions
   $("capIntro").style.opacity = 1 - range(p, 0.03, 0.12);
   $("hint").style.opacity = 1 - range(p, 0.01, 0.06);
   const w = range(p, 0.74, 0.86);
   $("capWorld").style.opacity = w * (1 - range(p, 0.97, 1));
   $("capWorld").style.transform = `scale(${lerp(1.08, 1, w)})`;
-
-  // 4) fly through the galaxy
-  if (renderer && visible && p > 0.15) {
-    const f = ease(range(p, 0.25, 1));
-    camera.position.set(Math.sin(t * 0.00008) * .4, lerp(4.2, 1.1, f), lerp(10, 3.2, f));
-    camera.lookAt(0, 0, 0);
-    galaxy.rotation.y = t * 0.00005 + f * 1.2;
-    stars.rotation.y = t * 0.00001;
-    renderer.render(scene, camera);
-  }
 }
 function loop(t) { frame(t); requestAnimationFrame(loop); }
 readScroll();
