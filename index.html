@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Salar Studio — Look closer</title>
-<meta name="description" content="Salar Studio is a Vancouver creative studio: logos and brand identity, websites and web apps, 3D and VFX, illustration and live event art.">
+<title>Salar Studio — Brands, websites &amp; games</title>
+<meta name="description" content="Salar Studio is a Vancouver creative studio and indie game maker: logos and brand identity, websites and web apps, games, 3D and VFX, illustration and live event art.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23141210'/%3E%3Ctext x='50' y='70' font-family='Arial Black,sans-serif' font-size='62' font-weight='900' fill='%23FF4F1F' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,6 +99,24 @@ a{color:inherit}
 .tile h3{font:800 28px/1 var(--display);letter-spacing:-.035em}
 .tile span{color:var(--mute);font-size:14px;text-align:right}
 .tile.wide{grid-column:1/-1}.tile.wide .pic{aspect-ratio:21/9}
+
+/* games */
+.games{background:#0B0B0E;color:var(--paper);padding:120px 0;border-radius:40px;margin-bottom:24px}
+.games .eyebrow{color:#9C9488}
+.games .sec-top h2{color:var(--paper)}
+.game{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(28px,4vw,60px);align-items:center}
+.game-shot{position:relative;display:block;border-radius:22px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.08)}
+.game-shot img{display:block;width:100%;height:auto;image-rendering:pixelated;transition:transform .6s}
+.game-shot:hover img{transform:scale(1.03)}
+.game-shot .play{position:absolute;left:18px;bottom:18px;background:var(--hot);color:#fff;padding:12px 18px;border-radius:999px;font:700 14px/1 var(--body)}
+.game-tag{font:600 12px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:#F5C04A}
+.game-info h3{font:800 clamp(48px,6vw,92px)/.9 var(--display);letter-spacing:-.05em;margin:16px 0 6px}
+.game-info h3 span{font-family:Tahoma,"Vazirmatn",sans-serif;font-weight:700;color:var(--hot);font-size:.62em;letter-spacing:0;margin-inline-start:.25em}
+.game-sub{font:italic 28px/1.1 var(--serif);color:#F5C04A;margin-bottom:20px}
+.game-info>p:not(.game-tag):not(.game-sub){color:#CFC7BA;max-width:520px}
+.game-facts{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 28px;padding:0}
+.game-facts li{border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:8px 13px;font-size:13px;color:#E8E2D6}
+@media (max-width:860px){.game{grid-template-columns:1fr}.games{border-radius:28px}}
 
 /* before / after */
 .ba-sec{background:var(--ink);color:var(--paper);padding:120px 0;border-radius:40px}
@@ -206,6 +224,7 @@ footer{background:var(--ink);color:#CFC7BA;padding:90px 0 40px}
     <a class="brand" href="#top"><span class="brand-dot">S</span>Salar Studio</a>
     <ul>
       <li><a href="#work">Work</a></li>
+      <li><a href="#games">Games</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -221,13 +240,13 @@ footer{background:var(--ink);color:#CFC7BA;padding:90px 0 40px}
     <canvas id="galaxy" aria-hidden="true"></canvas>
     <div class="cap cap-intro" id="capIntro">
       <h1>Look <span class="serif">closer.</span></h1>
-      <p>Every brand we make starts somewhere deeper than a template.</p>
+      <p>Every brand, site and game we make starts somewhere deeper than a template.</p>
     </div>
     <div class="scroll-hint" id="hint"><span class="drag-hint">Drag to spin&nbsp;&nbsp;·&nbsp;&nbsp;</span>Scroll <i></i></div>
     <div class="cap cap-world" id="capWorld">
       <div>
         <h2>A whole world <span class="serif">behind every eye.</span></h2>
-        <p>Brands, websites and visuals, drawn by hand in Vancouver.</p>
+        <p>Brands, websites and games, made by hand in Vancouver.</p>
       </div>
     </div>
   </div>
@@ -250,9 +269,9 @@ footer{background:var(--ink);color:#CFC7BA;padding:90px 0 40px}
 
 <section class="intro wrap">
   <p class="eyebrow rv">Let’s work together</p>
-  <h2 class="rv">Logos, websites and art for businesses that <span class="serif">refuse to blend in.</span></h2>
+  <h2 class="rv">Brands, websites and games for people who <span class="serif">refuse to blend in.</span></h2>
   <div class="intro-row rv">
-    <p>One studio for the whole picture: we draw the identity, build the site and make the content, so your brand looks and feels the same everywhere people meet it.</p>
+    <p>One studio for the whole picture: we draw the identity, build the site and make games people actually play. Same hands, same care, from the logo to the last pixel.</p>
     <a class="btn btn-hot" href="#contact">Tell us about your project →</a>
   </div>
 </section>
@@ -266,6 +285,26 @@ footer{background:var(--ink);color:#CFC7BA;padding:90px 0 40px}
     <a class="tile rv" href="https://smileamileart.com/" target="_blank" rel="noopener"><div class="pic"><img src="img/at-work.webp" alt="Live digital caricature at a corporate event" loading="lazy"></div><div class="meta"><h3>Smile A Mile Art</h3><span>Brand · Booking site · Events</span></div></a>
     <a class="tile rv" href="#before-after"><div class="pic"><img src="img/hideas-after.webp" alt="Hideas silent disco ceremonies website" loading="lazy" style="object-position:top"></div><div class="meta"><h3>Hideas</h3><span>Art direction · Website</span></div></a>
     <a class="tile wide rv" href="https://salarsalahi.com" target="_blank" rel="noopener"><div class="pic"><img src="img/vfx-env.webp" alt="3D environment of a ruined chapel lit by a beam of light" loading="lazy"></div><div class="meta"><h3>Film &amp; VFX</h3><span>Compositing · 3D environments</span></div></a>
+  </div>
+</section>
+
+<section class="games" id="games">
+  <div class="wrap">
+    <div class="sec-top rv"><div><p class="eyebrow">Salar Studio Games</p><h2>Now we make <span class="serif">games.</span></h2></div></div>
+    <article class="game rv">
+      <a class="game-shot" href="https://mrmeeseeks.github.io/khizesh-demo/" target="_blank" rel="noopener">
+        <img src="img/khizesh.webp" alt="Khizesh gameplay: pixel-art marchers carrying a torch past apartment blocks and protest banners" loading="lazy" width="800" height="448">
+        <span class="play">▶ Play free demo</span>
+      </a>
+      <div class="game-info">
+        <p class="game-tag">Free demo · Prologue + chapter 1</p>
+        <h3>Khizesh <span lang="fa" dir="rtl">خیزش</span></h3>
+        <p class="game-sub">Rise of the Lion</p>
+        <p>A pixel beat-’em-up about a torch passed from hand to hand through Iran’s protest movements, from 1999 to today. The people are peaceful: no guns, no smashing windows. They only defend themselves, and if the torch goes out, you lose.</p>
+        <ul class="game-facts"><li>Side-scrolling brawler</li><li>Plays in the browser, desktop &amp; phone</li><li>English · فارسی</li></ul>
+        <a class="btn btn-hot" href="https://mrmeeseeks.github.io/khizesh-demo/" target="_blank" rel="noopener">Play the demo ↗</a>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -303,13 +342,14 @@ footer{background:var(--ink);color:#CFC7BA;padding:90px 0 40px}
     <div class="rv">
       <p class="eyebrow">What we do</p>
       <h2>Services</h2>
-      <p>Four things, done properly. Work with us from Vancouver, Toronto or anywhere with Wi-Fi.</p>
+      <p>Five things, done properly. Work with us from Vancouver, Toronto or anywhere with Wi-Fi.</p>
     </div>
     <ol class="svc">
       <li class="rv"><span class="n">01</span><h3>Brand identity &amp; logos</h3><p>Marks people recognise at a glance, plus the colours, type and rules that keep them consistent.</p></li>
       <li class="rv"><span class="n">02</span><h3>Websites &amp; web apps</h3><p>Fast, mobile-first sites that turn visits into bookings, up to member portals with logins and dashboards.</p></li>
       <li class="rv"><span class="n">03</span><h3>3D, motion &amp; VFX</h3><p>Interactive 3D, animated heroes and film-grade compositing, like the dive at the top of this page.</p></li>
-      <li class="rv"><span class="n">04</span><h3>Illustration &amp; live art</h3><p>Hand-drawn illustration, collage and live caricature that gives people something to take home.</p></li>
+      <li class="rv"><span class="n">04</span><h3>Games &amp; interactive stories</h3><p>Browser and mobile games made in-house, from the pixel art to the code. Our first, Khizesh, is playable now.</p></li>
+      <li class="rv"><span class="n">05</span><h3>Illustration &amp; live art</h3><p>Hand-drawn illustration, collage and live caricature that gives people something to take home.</p></li>
     </ol>
   </div>
 </section>
@@ -320,9 +360,9 @@ footer{background:var(--ink);color:#CFC7BA;padding:90px 0 40px}
     <div>
       <p class="eyebrow">The studio</p>
       <h2>Hi, I’m <span class="serif">Salar.</span></h2>
-      <p>Caricature artist, VFX compositor and filmmaker. I started building brands and websites for the businesses I met along the way.</p>
+      <p>Caricature artist, VFX compositor and filmmaker. I started building brands and websites for the businesses I met along the way, and now I make games too.</p>
       <p>The person who draws your logo is the person who builds your site. No hand-offs, nothing lost in translation.</p>
-      <div class="roles"><span>Caricature artist</span><span>VFX compositor</span><span>Filmmaker</span><span>Web designer</span></div>
+      <div class="roles"><span>Caricature artist</span><span>VFX compositor</span><span>Filmmaker</span><span>Web designer</span><span>Game maker</span></div>
     </div>
   </div>
 </section>
@@ -356,6 +396,7 @@ footer{background:var(--ink);color:#CFC7BA;padding:90px 0 40px}
         <div class="chips">
           <label><input type="checkbox" name="need" value="Logo / brand"><span>Logo / brand</span></label>
           <label><input type="checkbox" name="need" value="Website"><span>Website</span></label>
+          <label><input type="checkbox" name="need" value="Game"><span>Game</span></label>
           <label><input type="checkbox" name="need" value="Web app"><span>Web app</span></label>
           <label><input type="checkbox" name="need" value="3D / VFX"><span>3D / VFX</span></label>
           <label><input type="checkbox" name="need" value="Illustration / live art"><span>Illustration / live art</span></label>
@@ -371,8 +412,8 @@ footer{background:var(--ink);color:#CFC7BA;padding:90px 0 40px}
 <footer>
   <div class="wrap">
     <div class="foot-grid">
-      <div><a class="brand" href="#top"><span class="brand-dot">S</span>Salar Studio</a><p>Brand, web &amp; visual studio.<br>Vancouver, BC.</p></div>
-      <div><h4>Services</h4><ul><li><a href="#services">Brand identity</a></li><li><a href="#services">Websites</a></li><li><a href="#services">3D &amp; VFX</a></li><li><a href="#services">Illustration</a></li></ul></div>
+      <div><a class="brand" href="#top"><span class="brand-dot">S</span>Salar Studio</a><p>Brand, web &amp; game studio.<br>Vancouver, BC.</p></div>
+      <div><h4>Services</h4><ul><li><a href="#services">Brand identity</a></li><li><a href="#services">Websites</a></li><li><a href="#games">Games</a></li><li><a href="#services">3D &amp; VFX</a></li><li><a href="#services">Illustration</a></li></ul></div>
       <div><h4>Studio</h4><ul><li><a href="#work">Work</a></li><li><a href="#before-after">Before &amp; after</a></li><li><a href="#about">About</a></li></ul></div>
       <div><h4>Connect</h4><ul><li><a href="#contact">Contact</a></li><li><a href="https://www.instagram.com/salar.art/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://salarsalahi.com" target="_blank" rel="noopener">VFX reel</a></li></ul></div>
     </div>
